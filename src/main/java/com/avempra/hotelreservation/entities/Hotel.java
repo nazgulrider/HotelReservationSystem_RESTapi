@@ -16,18 +16,25 @@ import java.util.HashSet;
 public class Hotel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    @Embedded
-    private Address address;
+
+
     private float rating;
+
     @ElementCollection
-    @JoinTable(name = "HOTEL_ROOMS")
+    @JoinTable(name = "hotel_rooms")
     private Collection<Room> room = new HashSet<>();
-    @OneToMany(fetch = FetchType.LAZY)
-    private Collection<User> customers = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY)
-    private Collection<Reservation> reservations = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<User> users;
+
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<Reservation> reservations;
+
+    @OneToOne(mappedBy = "hotel", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Address address;
 
 }

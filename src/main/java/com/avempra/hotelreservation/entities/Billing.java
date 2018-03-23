@@ -10,7 +10,7 @@ import javax.persistence.Enumerated;
 @Data
 @NoArgsConstructor
 @Embeddable
-class Billing {
+public class Billing {
     @Enumerated(EnumType.ORDINAL)
     private PaymentType paymentType;
     @Enumerated(EnumType.ORDINAL)

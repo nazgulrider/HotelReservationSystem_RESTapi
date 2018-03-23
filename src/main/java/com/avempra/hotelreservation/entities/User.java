@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashSet;
 
 @Data
 @NoArgsConstructor
@@ -15,20 +14,35 @@ import java.util.HashSet;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private UserRole userRole;
+
     private String firstName;
     private String lastName;
     private String email;
     private int phone;
+
     @Embedded
     private Login login;
+
     @ElementCollection
-    @JoinTable(name = "USER_ADDRESS")
-    private Collection<Address> address = new HashSet<>();
-    @Embedded
-    private Billing billing;
+    @JoinTable(name = "user_billing")
+    private Collection<Billing> billing;
+
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Collection<Address> address;
+
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "user",
+            cascade = CascadeType.ALL)
+    private Collection<Reservation> reservations;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    private Collection<Hotel> hotels;
 
 }
