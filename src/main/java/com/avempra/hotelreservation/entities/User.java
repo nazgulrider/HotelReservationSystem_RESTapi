@@ -23,7 +23,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private int phone;
+    private Long phone;
 
     @Embedded
     private Login login;
@@ -32,7 +32,7 @@ public class User {
     @JoinTable(name = "user_billing")
     private Collection<Billing> billing;
 
-    @OneToMany(mappedBy = "user",
+    @ManyToMany(mappedBy = "users",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Collection<Address> address;
@@ -42,7 +42,7 @@ public class User {
             cascade = CascadeType.ALL)
     private Collection<Reservation> reservations;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-    private Collection<Hotel> hotels;
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+//    private Collection<Hotel> hotels;
 
 }

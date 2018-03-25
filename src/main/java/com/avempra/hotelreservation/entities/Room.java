@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Embeddable
-class Room {
+public class Room {
     private int roomNumber;
     @Enumerated(EnumType.ORDINAL)
     private RoomType type;

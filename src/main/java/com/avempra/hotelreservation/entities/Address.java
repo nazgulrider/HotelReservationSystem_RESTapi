@@ -1,15 +1,18 @@
 package com.avempra.hotelreservation.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-class Address {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +24,9 @@ class Address {
     private String city;
     private String state;
     private int zip;
-    @ManyToOne
-    private User user;
-    @OneToOne
+    @ManyToMany
+    private Collection<User> users;
+    @OneToOne(mappedBy = "address")
     private Hotel hotel;
 
 }

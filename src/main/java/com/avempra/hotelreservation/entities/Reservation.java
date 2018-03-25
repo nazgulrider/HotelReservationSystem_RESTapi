@@ -18,7 +18,7 @@ public class Reservation {
     private Date checkIn;
     private Date checkOut;
     private Boolean paid;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
     @ManyToOne
     private Hotel hotel;

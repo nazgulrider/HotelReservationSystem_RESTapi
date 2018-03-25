@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-class Login {
+public class Login {
     private String userName;
     private String password;
 }

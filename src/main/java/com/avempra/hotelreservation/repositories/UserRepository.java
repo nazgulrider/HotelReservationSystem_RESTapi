@@ -1,7 +1,7 @@
 package com.avempra.hotelreservation.repositories;
 
 import com.avempra.hotelreservation.entities.User;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends PagingAndSortingRepository<User,Long> {
+public interface UserRepository extends CrudRepository<User,Long> {
 }
