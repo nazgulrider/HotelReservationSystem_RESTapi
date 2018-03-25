@@ -1,18 +1,19 @@
 package com.avempra.hotelreservation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Hotel {
 
     @Id
@@ -20,16 +21,10 @@ public class Hotel {
     private Long id;
 
     private String name;
-
-
     private float rating;
 
-    @ElementCollection
-    @JoinTable(name = "hotel_rooms")
-    private Collection<Room> room = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Collection<User> users;
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<Room> rooms;
 
     @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Reservation> reservations;

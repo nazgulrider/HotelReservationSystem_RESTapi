@@ -1,12 +1,9 @@
 package com.avempra.hotelreservation.repositories;
 
 import com.avempra.hotelreservation.entities.Hotel;
-import com.avempra.hotelreservation.entities.Reservation;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@RepositoryRestResource
-public interface HotelRepository extends CrudRepository<Hotel,Long> {
+
+public interface HotelRepository extends JpaRepository<Hotel,Long> {
 
 }

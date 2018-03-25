@@ -1,15 +1,19 @@
 package com.avempra.hotelreservation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +22,12 @@ public class Reservation {
     private Date checkIn;
     private Date checkOut;
     private Boolean paid;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
+
     @ManyToOne
     private Hotel hotel;
+    @OneToMany(mappedBy = "reservation")
+    private Collection<Room> rooms;
 
 }

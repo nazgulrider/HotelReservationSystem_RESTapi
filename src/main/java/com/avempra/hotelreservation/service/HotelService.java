@@ -5,6 +5,9 @@ import com.avempra.hotelreservation.entities.Reservation;
 import com.avempra.hotelreservation.repositories.HotelRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class HotelService implements IHotelService {
@@ -16,10 +19,8 @@ public class HotelService implements IHotelService {
     }
 
     @Override
-    public Iterable<Reservation> getReservationsForHotelId(Long hotelId) {
+    public List<Hotel> getAllHotels() {
 
-        return this.hotelRepository
-                .findById(hotelId)
-                .map(Hotel::getReservations).orElseThrow(NegativeArraySizeException::new);
+        return this.hotelRepository.findAll().stream().collect(Collectors.toList());
     }
 }

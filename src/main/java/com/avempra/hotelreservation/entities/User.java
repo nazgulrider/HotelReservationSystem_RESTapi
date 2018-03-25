@@ -1,5 +1,6 @@
 package com.avempra.hotelreservation.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class User {
     private Long phone;
 
     @Embedded
+    @JsonIgnore
     private Login login;
 
     @ElementCollection
@@ -41,6 +43,7 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.ALL)
     private Collection<Reservation> reservations;
+
 
 //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
 //    private Collection<Hotel> hotels;
