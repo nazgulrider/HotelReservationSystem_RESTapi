@@ -1,6 +1,7 @@
 package com.avempra.hotelreservation.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Reservation {
 
     @ManyToOne
     private Hotel hotel;
+
     @OneToMany(mappedBy = "reservation")
     private Collection<Room> rooms;
 
