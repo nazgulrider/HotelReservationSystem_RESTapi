@@ -4,10 +4,11 @@ package com.avempra.hotelreservation.controller;
 import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.service.IHotelService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("/hotels")
@@ -19,32 +20,43 @@ public class HotelController {
         this.hotelService = hotelService;
     }
 
-    @GetMapping(value = {"","/"})
-    public List<Hotel> getHotels(){
-        return hotelService.getAllHotels();
+    @GetMapping
+    public ResponseEntity<Collection<Hotel>> getAllHotels(){
+        return new ResponseEntity<>(
+                hotelService.getAllHotels(), HttpStatus.I_AM_A_TEAPOT
+        );
     }
 
-    @PostMapping(value = {"","/"})
-    public Hotel saveHotel(@RequestBody Hotel hotel){
-        return hotelService.saveHotel(hotel);
+    @PostMapping
+    public ResponseEntity<Hotel> saveHotel(@RequestBody Hotel hotel){
+        return new ResponseEntity<>(
+                hotelService.saveHotel(hotel), HttpStatus.CREATED
+        );
     }
 
     @GetMapping("/{hotelId}")
-    public Hotel findHotelById(@PathVariable Long hotelId){
+    public ResponseEntity<Hotel> findHotelById(@PathVariable Long hotelId){
+        //TODO Add HATEOAS links
          //hotel.add(linkTo(methodOn(HotelController.class).findHotelById(hotelId)).withSelfRel());
-        return hotelService.findHotelById(hotelId);
+        return new ResponseEntity<>(
+                hotelService.findHotelById(hotelId), HttpStatus.OK
+        );
     }
 
     @GetMapping("/{hotelId}/rooms")
-    public Collection<Room> getRoomsForHotelId(@PathVariable Long hotelId){
-
-        return hotelService.findRoomsByHotelId(hotelId);
+    public ResponseEntity<Collection<Room>> getRoomsForHotelId(@PathVariable Long hotelId){
+        //TODO Add HATEOAS links
+        return new ResponseEntity<>(
+                hotelService.findRoomsByHotelId(hotelId),HttpStatus.OK
+        );
     }
 
     @PostMapping("/{hotelId}/rooms")
-    public Hotel saveRoomToHotel(@PathVariable Long hotelId, @RequestBody Room room){
+    public ResponseEntity<Hotel> saveRoomToHotel(@PathVariable Long hotelId, @RequestBody Room room){
 
-        return hotelService.saveRoomToHotel(hotelId, room);
+        return new ResponseEntity<>(
+                hotelService.saveRoomToHotel(hotelId, room), HttpStatus.CREATED
+        );
     }
 
 }
