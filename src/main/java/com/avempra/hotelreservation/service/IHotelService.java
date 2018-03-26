@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface IHotelService {
-    List<Hotel> getAllHotels();
+    Collection<Hotel> getAllHotels();
 
     Hotel findHotelById(Long hotelId);
 

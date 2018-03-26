@@ -7,7 +7,6 @@ import com.avempra.hotelreservation.repositories.HotelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 
 
 @Service
@@ -20,7 +19,7 @@ public class HotelService implements IHotelService {
     }
 
     @Override
-    public List<Hotel> getAllHotels() {
+    public Collection<Hotel> getAllHotels() {
 
         return this.hotelRepository.findAll();
     }
@@ -46,7 +45,7 @@ public class HotelService implements IHotelService {
         return hotelRepository.findById(hotelId).map(hotel -> {
             hotel.getRooms().add(room);
             return hotelRepository.save(hotel);
-        }).orElseThrow(DataNotFoundException::new); //TODO implement better exception handling for save that doesn't work out
+        }).orElseThrow(DataNotFoundException::new); //TODO implement different exception handling for save that doesn't work out
     }
 
 

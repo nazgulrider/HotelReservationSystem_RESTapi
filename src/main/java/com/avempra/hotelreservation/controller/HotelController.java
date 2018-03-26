@@ -34,6 +34,8 @@ public class HotelController {
         );
     }
 
+    //TODO Implement PUT request on hotel
+
     @GetMapping("/{hotelId}")
     public ResponseEntity<Hotel> findHotelById(@PathVariable Long hotelId){
         //TODO Add HATEOAS links
@@ -42,6 +44,11 @@ public class HotelController {
                 hotelService.findHotelById(hotelId), HttpStatus.OK
         );
     }
+
+    //TODO Implement PATCH request on hotel
+    //TODO Implement DELETE request on hotel
+    //TODO Implement DELETE request on all Hotels?
+
 
     @GetMapping("/{hotelId}/rooms")
     public ResponseEntity<Collection<Room>> getRoomsForHotelId(@PathVariable Long hotelId){
@@ -58,5 +65,9 @@ public class HotelController {
                 hotelService.saveRoomToHotel(hotelId, room), HttpStatus.CREATED
         );
     }
+
+    //TODO Implement PUT request on hotel room
+    //TODO Implement PATCH request on hotel room
+    //TODO Implement DELETE request on hotel room
 
 }
