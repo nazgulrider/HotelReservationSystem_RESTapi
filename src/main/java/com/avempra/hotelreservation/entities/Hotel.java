@@ -20,6 +20,7 @@ public class Hotel {
     private String name;
     private float rating;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "hotel_rooms",
             joinColumns = @JoinColumn(name = "hotel_id"),

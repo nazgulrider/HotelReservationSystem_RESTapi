@@ -1,52 +1,22 @@
 package com.avempra.hotelreservation.service;
-
 import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
-import com.avempra.hotelreservation.exceptions.DataNotFoundException;
-import com.avempra.hotelreservation.repositories.HotelRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 
-@Service
-public class HotelService implements IHotelService {
+public interface HotelService {
+    Collection<Hotel> getAllHotels();
 
-    private HotelRepository hotelRepository;
+    Hotel findHotelById(Long hotelId);
 
-    public HotelService(HotelRepository hotelRepository) {
-        this.hotelRepository = hotelRepository;
-    }
+    Hotel saveHotel(Hotel hotel);
 
-    @Override
-    public Collection<Hotel> getAllHotels() {
+    Collection<Room> findRoomsByHotelId(Long hotelId);
 
-        return this.hotelRepository.findAll();
-    }
+    Hotel saveRoomToHotel(Long hotelId, Room room);
 
-    @Override
-    public Hotel findHotelById(Long hotelId) {
-        return hotelRepository.findById(hotelId).orElseThrow(DataNotFoundException::new);
-    }
+    Hotel updateHotel(Long hotelId, Hotel hotel);
 
-    @Override
-    public Hotel saveHotel(Hotel hotel) {
-        return hotelRepository.save(hotel);
-    }
-
-    @Override
-    public Collection<Room> findRoomsByHotelId(Long hotelId) {
-        return hotelRepository.findById(hotelId).map(Hotel::getRooms)
-                .orElseThrow(DataNotFoundException::new);
-    }
-    @Override
-    public Hotel saveRoomToHotel(Long hotelId, Room room) {
-
-        return hotelRepository.findById(hotelId).map(hotel -> {
-            hotel.getRooms().add(room);
-            return hotelRepository.save(hotel);
-        }).orElseThrow(DataNotFoundException::new); //TODO implement different exception handling for save that doesn't work out
-    }
-
-
+    void deleteHotelById(Long hotelId);
 }
