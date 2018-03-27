@@ -4,7 +4,9 @@ package com.avempra.hotelreservation.controller;
 import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.resources.HotelResource;
+import com.avempra.hotelreservation.resources.ReservationResource;
 import com.avempra.hotelreservation.service.HotelService;
+import com.avempra.hotelreservation.service.ReservationService;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,21 +29,32 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author Prashanta K Shrestha
  */
 @RestController
-@RequestMapping("/hotels")
+@RequestMapping(value = "/hotels",produces = "application/hal+json")
 public class HotelController {
 
     private HotelService hotelService;
+    private ReservationService reservationService;
 
-    public HotelController(HotelService hotelService) {
+    public HotelController(HotelService hotelService, ReservationService reservationService) {
         this.hotelService = hotelService;
+        this.reservationService = reservationService;
     }
 
-    @GetMapping(produces = "application/hal+json")
+
+    @GetMapping
     public ResponseEntity<Resources<HotelResource>> getAllHotels(){
         return new ResponseEntity<>(
                 hotelService.findAllHotels(), HttpStatus.OK
         );
     }
+    @GetMapping("/{hotelId}/reservations")
+    public ResponseEntity<Resources<ReservationResource>> getAllReservationsForHotelId(@PathVariable("hotelId") final long id){
+        //TODO Implement GET for all reservations
+        return new ResponseEntity<>(
+                reservationService.getAllReservationsByHotelId(id), HttpStatus.OK
+        );
+    }
+
 
 
 //    @GetMapping
