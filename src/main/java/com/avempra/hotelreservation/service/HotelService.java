@@ -1,12 +1,17 @@
 package com.avempra.hotelreservation.service;
 import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
+import com.avempra.hotelreservation.resources.HotelResource;
+import org.springframework.hateoas.Resources;
 
 import java.util.Collection;
+import java.util.List;
 
 
 public interface HotelService {
-    Collection<Hotel> getAllHotels();
+    Resources<HotelResource> findAllHotels();
+
+    List<Hotel> getAllHotels();
 
     Hotel findHotelById(Long hotelId);
 

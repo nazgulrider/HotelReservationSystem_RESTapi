@@ -3,12 +3,22 @@ package com.avempra.hotelreservation.controller;
 
 import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
+import com.avempra.hotelreservation.resources.HotelResource;
 import com.avempra.hotelreservation.service.HotelService;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 
 /**
  * HotelController is the main entry point for all requests related to hotels
@@ -25,12 +35,21 @@ public class HotelController {
         this.hotelService = hotelService;
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<Hotel>> getAllHotels(){
+    @GetMapping(produces = "application/hal+json")
+    public ResponseEntity<Resources<HotelResource>> getAllHotels(){
         return new ResponseEntity<>(
-                hotelService.getAllHotels(), HttpStatus.I_AM_A_TEAPOT
+                hotelService.findAllHotels(), HttpStatus.OK
         );
     }
+
+
+//    @GetMapping
+//    public ResponseEntity<Collection<Hotel>> getAllHotels(){
+//        return new ResponseEntity<>(
+//                hotelService.getAllHotels(), HttpStatus.I_AM_A_TEAPOT
+//        );
+//    }
+
 
     @PostMapping
     public ResponseEntity<Hotel> saveHotel(@RequestBody Hotel hotel){
@@ -44,11 +63,12 @@ public class HotelController {
     @GetMapping("/{hotelId}")
     public ResponseEntity<Hotel> findHotelById(@PathVariable Long hotelId){
         //TODO Add HATEOAS links
-         //hotel.add(linkTo(methodOn(HotelController.class).findHotelById(hotelId)).withSelfRel());
+//         hotel.add(linkTo(methodOn(HotelController.class).findHotelById(hotelId)).withSelfRel());
         return new ResponseEntity<>(
                 hotelService.findHotelById(hotelId), HttpStatus.OK
         );
     }
+
 
     /**
      *Does partial update on Hotel

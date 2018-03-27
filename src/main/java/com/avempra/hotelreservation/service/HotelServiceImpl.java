@@ -4,9 +4,14 @@ import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.exceptions.DataNotFoundException;
 import com.avempra.hotelreservation.repositories.HotelRepository;
+import com.avempra.hotelreservation.resources.HotelResource;
+import org.springframework.hateoas.Resources;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -19,7 +24,13 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public Collection<Hotel> getAllHotels() {
+    public Resources<HotelResource> findAllHotels(){
+        final List<HotelResource> hotelResources = hotelRepository.findAll().stream().map(HotelResource::new).collect(Collectors.toList());
+        return new Resources<>(hotelResources);
+    }
+
+    @Override
+    public List<Hotel> getAllHotels() {
 
         return this.hotelRepository.findAll();
     }
