@@ -4,24 +4,19 @@ import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.resources.HotelResource;
 import org.springframework.hateoas.Resources;
 
-import java.util.Collection;
-import java.util.List;
-
 
 public interface HotelService {
     Resources<HotelResource> findAllHotels();
 
-    List<Hotel> getAllHotels();
+    HotelResource findHotelById(Long hotelId);
 
-    Hotel findHotelById(Long hotelId);
+    HotelResource saveHotel(Hotel hotel);
 
-    Hotel saveHotel(Hotel hotel);
+    Resources<Room> findRoomsByHotelId(Long hotelId);
 
-    Collection<Room> findRoomsByHotelId(Long hotelId);
+    HotelResource saveRoomToHotel(Long hotelId, Room room);
 
-    Hotel saveRoomToHotel(Long hotelId, Room room);
-
-    Hotel updateHotel(Long hotelId, Hotel hotel);
+    HotelResource updateHotel(Long hotelId, Hotel hotel);
 
     void deleteHotelById(Long hotelId);
 }

@@ -30,44 +30,45 @@ public class HotelServiceImpl implements HotelService {
         return new Resources<>(hotelResources);
     }
 
-    @Override
-    public List<Hotel> getAllHotels() {
-
-        return this.hotelRepository.findAll();
-    }
 
     @Override
-    public Hotel findHotelById(Long hotelId) {
-        return hotelRepository.findById(hotelId)
+    public HotelResource findHotelById(Long hotelId) {
+
+        Hotel hotel =  hotelRepository.findById(hotelId)
                 .orElseThrow(()->new DataNotFoundException("Hotel with id "+hotelId+" was not found!"));
+        return new HotelResource(hotel);
     }
 
     @Override
-    public Hotel saveHotel(Hotel hotel) {
-        return hotelRepository.save(hotel);
+    public HotelResource saveHotel(Hotel hotel) {
+        return new HotelResource(hotelRepository.save(hotel));
     }
 
     @Override
-    public Collection<Room> findRoomsByHotelId(Long hotelId) {
-        return hotelRepository.findById(hotelId).map(Hotel::getRooms)
+    public Resources<Room> findRoomsByHotelId(Long hotelId) {
+        Collection<Room> rooms =  hotelRepository.findById(hotelId).map(Hotel::getRooms)
                 .orElseThrow(DataNotFoundException::new);
+        return new Resources<>(rooms);
     }
-    @Override
-    public Hotel saveRoomToHotel(Long hotelId, Room room) {
 
-        return hotelRepository.findById(hotelId).map(hotel -> {
-            hotel.getRooms().add(room);
+    @Override
+    public HotelResource saveRoomToHotel(Long hotelId, Room room) {
+
+        Hotel savedHotel =  hotelRepository.findById(hotelId).map(hotel -> {
+                hotel.getRooms().add(room);
             return hotelRepository.save(hotel);
         }).orElseThrow(DataNotFoundException::new); //TODO implement different exception handling for save that doesn't work out
+        return new HotelResource(savedHotel);
     }
 
     @Override
-    public Hotel updateHotel(Long hotelId, Hotel hotel) {
-        return hotelRepository.findById(hotelId)
+    public HotelResource updateHotel(Long hotelId, Hotel hotel) {
+        Hotel updatedHotel = hotelRepository.findById(hotelId)
                 .map(hotel1 ->{ hotel.setId(hotel1.getId());
                     return hotelRepository.save(hotel);
                 } )
                 .orElseThrow(DataNotFoundException::new);
+        return new HotelResource(updatedHotel);
     }
 
     @Override

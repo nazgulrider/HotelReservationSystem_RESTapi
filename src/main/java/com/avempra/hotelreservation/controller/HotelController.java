@@ -14,10 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
+
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -55,18 +54,8 @@ public class HotelController {
         );
     }
 
-
-
-//    @GetMapping
-//    public ResponseEntity<Collection<Hotel>> getAllHotels(){
-//        return new ResponseEntity<>(
-//                hotelService.getAllHotels(), HttpStatus.I_AM_A_TEAPOT
-//        );
-//    }
-
-
     @PostMapping
-    public ResponseEntity<Hotel> saveHotel(@RequestBody Hotel hotel){
+    public ResponseEntity<HotelResource> saveHotel(@RequestBody Hotel hotel){
         return new ResponseEntity<>(
                 hotelService.saveHotel(hotel), HttpStatus.CREATED
         );
@@ -75,7 +64,7 @@ public class HotelController {
 
 
     @GetMapping("/{hotelId}")
-    public ResponseEntity<Hotel> findHotelById(@PathVariable Long hotelId){
+    public ResponseEntity<HotelResource> findHotelById(@PathVariable Long hotelId){
         //TODO Add HATEOAS links
 //         hotel.add(linkTo(methodOn(HotelController.class).findHotelById(hotelId)).withSelfRel());
         return new ResponseEntity<>(
@@ -91,7 +80,7 @@ public class HotelController {
      * @return Returns updated instance of the Hotel that has been saved to the database
      */
     @PatchMapping("/{hotelId}")
-    public ResponseEntity<Hotel> updateHotel(@PathVariable Long hotelId, @RequestBody Hotel hotel){
+    public ResponseEntity<HotelResource> updateHotel(@PathVariable Long hotelId, @RequestBody Hotel hotel){
         return new ResponseEntity<>(
                 hotelService.updateHotel(hotelId, hotel), HttpStatus.OK
         );
@@ -106,23 +95,18 @@ public class HotelController {
 
 
     @GetMapping("/{hotelId}/rooms")
-    public ResponseEntity<Collection<Room>> getRoomsForHotelId(@PathVariable Long hotelId){
-        //TODO Add HATEOAS links
+    public ResponseEntity<Resources<Room>> getRoomsForHotelId(@PathVariable Long hotelId){
         return new ResponseEntity<>(
                 hotelService.findRoomsByHotelId(hotelId),HttpStatus.OK
         );
     }
 
     @PostMapping("/{hotelId}/rooms")
-    public ResponseEntity<Hotel> saveRoomToHotel(@PathVariable Long hotelId, @RequestBody Room room){
+    public ResponseEntity<HotelResource> saveRoomToHotel(@PathVariable Long hotelId, @RequestBody Room room){
 
         return new ResponseEntity<>(
                 hotelService.saveRoomToHotel(hotelId, room), HttpStatus.CREATED
         );
     }
-
-    //TODO Implement PUT request on hotel room
-    //TODO Implement PATCH request on hotel room
-    //TODO Implement DELETE request on hotel room
 
 }

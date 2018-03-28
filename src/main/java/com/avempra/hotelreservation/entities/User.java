@@ -48,7 +48,5 @@ public class User {
     private Collection<Reservation> reservations;
 
 
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-//    private Collection<Hotel> hotels;
 
 }

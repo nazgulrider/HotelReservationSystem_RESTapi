@@ -21,7 +21,6 @@ public class ReservationController {
 
     @GetMapping
     public ResponseEntity<Resources<ReservationResource>> getAllReservations(){
-        //TODO Implement GET for all reservations
         return new ResponseEntity<>(
                 reservationService.getAll(), HttpStatus.OK
                 );
@@ -29,28 +28,30 @@ public class ReservationController {
 
     @GetMapping("/{reservationId}")
     public ResponseEntity<ReservationResource> getReservationWithId(@PathVariable("reservationId") final long id){
-        //TODO Implement GET for all reservations
-        return null;
+        return new ResponseEntity<>(
+                reservationService.findReservationById(id), HttpStatus.OK
+        );
     }
-
 
     @PostMapping
     public ResponseEntity<ReservationResource> makeReservation(@RequestBody Reservation reservation){
-        //TODO Implement POST for all reservations
-        return null;
+        return new ResponseEntity<>(
+                reservationService.saveReservation(reservation), HttpStatus.CREATED
+        );
     }
 
     @PatchMapping("/{reservationId}")
     public ResponseEntity<ReservationResource> updateReservation(@PathVariable("reservationId") final long id,
                                                                  @RequestBody Reservation reservation ){
-        //TODO Implement PATCH for a reservation
-        return null;
+        return new ResponseEntity<>(
+                reservationService.updateReservation(id,reservation), HttpStatus.CREATED
+        );
     }
 
     @DeleteMapping("/{reservationId}")
-    public ResponseEntity delete(@PathVariable("reservationId") final long id){
-        //TODO Implement DELETE for all reservations
-        return null;
+    public ResponseEntity<Void> delete(@PathVariable("reservationId") final long id){
+        reservationService.deleteReservationById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
