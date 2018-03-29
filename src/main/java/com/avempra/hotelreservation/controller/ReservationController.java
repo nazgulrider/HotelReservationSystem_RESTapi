@@ -1,6 +1,7 @@
 package com.avempra.hotelreservation.controller;
 
 import com.avempra.hotelreservation.entities.Reservation;
+import com.avempra.hotelreservation.resources.HotelResource;
 import com.avempra.hotelreservation.resources.ReservationResource;
 import com.avempra.hotelreservation.service.ReservationService;
 import org.springframework.hateoas.Resources;
@@ -53,6 +54,10 @@ public class ReservationController {
         reservationService.deleteReservationById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    ///---------------------------------------------------------------------------------------------
+
+
 
 
 }

@@ -1,7 +1,9 @@
 package com.avempra.hotelreservation.controller;
 
 import com.avempra.hotelreservation.entities.User;
+import com.avempra.hotelreservation.resources.ReservationResource;
 import com.avempra.hotelreservation.resources.UserResource;
+import com.avempra.hotelreservation.service.ReservationService;
 import com.avempra.hotelreservation.service.UserService;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
@@ -12,9 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/users", produces = "application/hal+json")
 public class UserController {
     private UserService userService;
+    private ReservationService reservationService;
 
-    public UserController(UserService userService) {
+
+    public UserController(UserService userService, ReservationService reservationService) {
         this.userService = userService;
+        this.reservationService = reservationService;
     }
 
     @GetMapping
@@ -50,6 +55,14 @@ public class UserController {
     public ResponseEntity delete(@PathVariable("userId") final long userId){
         userService.deleteUserById(userId);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    //-------------------------------------------------------------------------------
+    @GetMapping("/{userId}/reservations")
+    public ResponseEntity<Resources<ReservationResource>> getAllReservations(@PathVariable("userId") final long userId){
+        return new ResponseEntity<>(
+                reservationService.findReservationByUser(userId), HttpStatus.OK
+        );
     }
 
 }

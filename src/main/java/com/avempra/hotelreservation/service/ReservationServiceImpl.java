@@ -5,6 +5,7 @@ import com.avempra.hotelreservation.entities.Reservation;
 import com.avempra.hotelreservation.exceptions.DataNotFoundException;
 import com.avempra.hotelreservation.repositories.HotelRepository;
 import com.avempra.hotelreservation.repositories.ReservationRepository;
+import com.avempra.hotelreservation.resources.HotelResource;
 import com.avempra.hotelreservation.resources.ReservationResource;
 import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
@@ -40,24 +41,7 @@ public class ReservationServiceImpl implements ReservationService {
         return new Resources<>(reservationResources);
     }
 
-    /**
-     * Fetches all reservations by the hotel that the reservation belongs to
-     * @param hotelId Id of the hotel for which we want to find the reservations
-     * @return Returns collection of resource for the reservation objects
-     */
-    @Override
-    public Resources<ReservationResource> getAllReservationsByHotelId(long hotelId) {
-        //Check to see if hotel exists
-        Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(DataNotFoundException::new);
 
-        //if hotel exists pass it to findAllByHotel function in reservationRepository
-        final List<ReservationResource> reservationResources =reservationRepository.findAllByHotel(hotel)
-                    .stream()
-                    .map(ReservationResource::new)
-                    .collect(Collectors.toList());
-
-        return new Resources<>(reservationResources);
-    }
 
     /**
      * Finds reservation matching the reservation Id
@@ -110,6 +94,36 @@ public class ReservationServiceImpl implements ReservationService {
         }else {
             throw new DataNotFoundException("Could not delete reservation "+reservationId);
         }
+    }
+
+    //--------------------------------------------------------------------------------------------
+
+    @Override
+    public Resources<ReservationResource> findReservationByUser(long userId) {
+        return new Resources<>(reservationRepository.findAllByUser_Id(userId)
+                .stream()
+                .map(ReservationResource::new)
+                .collect(Collectors.toList()));
+    }
+
+
+    /**
+     * Fetches all reservations by the hotel that the reservation belongs to
+     * @param hotelId Id of the hotel for which we want to find the reservations
+     * @return Returns collection of resource for the reservation objects
+     */
+    @Override
+    public Resources<ReservationResource> getAllReservationsByHotelId(long hotelId) {
+        //Check to see if hotel exists
+        Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(DataNotFoundException::new);
+
+        //if hotel exists pass it to findAllByHotel function in reservationRepository
+        final List<ReservationResource> reservationResources =reservationRepository.findAllByHotel(hotel)
+                .stream()
+                .map(ReservationResource::new)
+                .collect(Collectors.toList());
+
+        return new Resources<>(reservationResources);
     }
 
 }

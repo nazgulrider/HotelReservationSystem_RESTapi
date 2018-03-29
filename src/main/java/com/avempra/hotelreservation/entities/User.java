@@ -21,8 +21,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    private UserRole userRole=UserRole.CUSTOMER;
 
     private String firstName;
     private String lastName;
@@ -42,6 +43,7 @@ public class User {
             cascade = CascadeType.ALL)
     private Collection<Address> address;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "user",
             cascade = CascadeType.ALL)

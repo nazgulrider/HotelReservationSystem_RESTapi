@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation,Long> {
 List<Reservation> findAllByHotel(Hotel hotel);
+List<Reservation> findAllByUser_Id(long userId);
 }

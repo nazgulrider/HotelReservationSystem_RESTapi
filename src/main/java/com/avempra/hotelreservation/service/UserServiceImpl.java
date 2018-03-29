@@ -22,7 +22,8 @@ public class UserServiceImpl implements UserService {
         return new Resources<>(userRepository.findAll()
                 .stream()
                 .map(UserResource::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())
+        );
     }
 
     @Override
