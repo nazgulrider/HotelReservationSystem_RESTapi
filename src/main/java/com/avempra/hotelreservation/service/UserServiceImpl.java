@@ -56,4 +56,6 @@ public class UserServiceImpl implements UserService {
             throw new DataNotFoundException("User with Id "+userId+" was not deleted because User could not be found");
         }
     }
+
+
 }

@@ -11,7 +11,7 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Hotel.class)
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,10 @@ public class Hotel {
     private Collection<Room> rooms = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Collection<Reservation> reservations = new ArrayList<>();
+    @OneToMany(mappedBy = "hotel",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Collection<Reservation> reservations;
 
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

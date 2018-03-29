@@ -18,7 +18,11 @@ public class UserResource extends ResourceSupport {
     public UserResource(final User user) {
         this.user = user;
         final long id = user.getId();
+
+        //Add link to self
         add(linkTo(methodOn(UserController.class).getUserWithId(id)).withSelfRel());
+        //Add link to all the reservations belonging to User
         add(linkTo(methodOn(UserController.class).getAllReservations(id)).withRel("reservations"));
     }
+
 }

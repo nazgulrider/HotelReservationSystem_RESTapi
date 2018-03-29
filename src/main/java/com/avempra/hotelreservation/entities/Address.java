@@ -1,6 +1,7 @@
 package com.avempra.hotelreservation.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Address.class)
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +29,10 @@ public class Address {
     private String state;
     private int zip;
 
-    @ManyToMany
-    private Collection<User> users;
+    @JsonIgnore
+    @ManyToOne
+    private User user;
+
     @OneToOne(mappedBy = "address")
     private Hotel hotel;
 

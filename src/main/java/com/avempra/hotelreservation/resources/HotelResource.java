@@ -23,4 +23,5 @@ public class HotelResource extends ResourceSupport {
         add(linkTo(methodOn(HotelController.class).getAllReservationsForHotelId(id)).withRel("Reservations"));
         add(linkTo(methodOn(HotelController.class).findHotelById(id)).withSelfRel());
     }
+
 }

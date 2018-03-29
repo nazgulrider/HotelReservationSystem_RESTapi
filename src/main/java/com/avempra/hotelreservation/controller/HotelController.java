@@ -66,7 +66,6 @@ public class HotelController {
     @GetMapping("/{hotelId}")
     public ResponseEntity<HotelResource> findHotelById(@PathVariable Long hotelId){
         //TODO Add HATEOAS links
-//         hotel.add(linkTo(methodOn(HotelController.class).findHotelById(hotelId)).withSelfRel());
         return new ResponseEntity<>(
                 hotelService.findHotelById(hotelId), HttpStatus.OK
         );
