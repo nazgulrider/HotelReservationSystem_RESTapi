@@ -19,10 +19,11 @@ public class ReservationResource extends ResourceSupport{
     public ReservationResource(final Reservation reservation) {
         this.reservation = reservation;
         final long id = reservation.getId();
-        add(linkTo(ReservationController.class).withRel("All-Reservations"));
+        add(linkTo(methodOn(ReservationController.class).getReservationWithId(id)).withSelfRel());
         add(linkTo(methodOn(ReservationController.class).getUserForReservation(id)).withRel("user"));
         add(linkTo(methodOn(ReservationController.class).getHotelForReservation(id)).withRel("hotel"));
-        add(linkTo(methodOn(ReservationController.class).getReservationWithId(id)).withSelfRel());
+        add(linkTo(methodOn(ReservationController.class).getRoomsForReservation(id)).withRel("rooms"));
+
     }
 
 

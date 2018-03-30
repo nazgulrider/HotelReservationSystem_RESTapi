@@ -25,7 +25,7 @@ public class Reservation {
     private Date checkOut;
     private Boolean paid;
 
-    @JsonIgnore
+
     @ManyToOne
     private User user;
 
@@ -33,6 +33,7 @@ public class Reservation {
     @ManyToOne
     private Hotel hotel;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "reservation")
     private Collection<Room> rooms;
 
