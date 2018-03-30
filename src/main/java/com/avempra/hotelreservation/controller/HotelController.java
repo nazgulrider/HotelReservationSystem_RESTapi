@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -39,21 +40,22 @@ public class HotelController {
         this.reservationService = reservationService;
     }
 
-
+    /**
+     * Maps to all hotels in the system
+     * @return Returns all existing hotels in the database
+     */
     @GetMapping
     public ResponseEntity<Resources<HotelResource>> getAllHotels(){
         return new ResponseEntity<>(
                 hotelService.findAllHotels(), HttpStatus.OK
         );
     }
-    @GetMapping("/{hotelId}/reservations")
-    public ResponseEntity<Resources<ReservationResource>> getAllReservationsForHotelId(@PathVariable("hotelId") final long id){
-        //TODO Implement GET for all reservations
-        return new ResponseEntity<>(
-                reservationService.getAllReservationsByHotelId(id), HttpStatus.OK
-        );
-    }
 
+    /**
+     * Saves a new instance of a hotel object to the database
+     * @param hotel The hotel object that needs to be saved to the database
+     * @return Returns the saved hotel if the action was successful
+     */
     @PostMapping
     public ResponseEntity<HotelResource> saveHotel(@RequestBody Hotel hotel){
         return new ResponseEntity<>(
@@ -62,7 +64,11 @@ public class HotelController {
     }
 
 
-
+    /**
+     * Maps to a hotel with given id
+     * @param hotelId Id of the hotel to search for
+     * @return Returns an instance of hotel wrapped in a Hotel resource object
+     */
     @GetMapping("/{hotelId}")
     public ResponseEntity<HotelResource> findHotelById(@PathVariable Long hotelId){
         //TODO Add HATEOAS links
@@ -85,14 +91,22 @@ public class HotelController {
         );
     }
 
-    //TODO Implement DELETE request on a hotel
+    /**
+     * Mapping to delete the hotel with given id
+     * @param hotelId Id of the hotel to be deleted
+     * @return Returns an empty response object with status
+     */
     @DeleteMapping("/{hotelId}")
     public ResponseEntity<Void> deleteHotelWithId(@PathVariable Long hotelId){
         hotelService.deleteHotelById(hotelId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    /**
+     *Maps to the rooms that are available for a hotel with a given Id
+     * @param hotelId The Id of the hotel to be searched for rooms
+     * @return Returns rooms for the hotel with the given Id
+     */
     @GetMapping("/{hotelId}/rooms")
     public ResponseEntity<Resources<Room>> getRoomsForHotelId(@PathVariable Long hotelId){
         return new ResponseEntity<>(
@@ -100,11 +114,32 @@ public class HotelController {
         );
     }
 
+
+    //TODO Refactor this so that it returns an instance of a room instead of the hotel to which the room is saved to
+    /**
+     * Saves room object to database and maps it to the hotelId to which it was saved. Hotel to be saved to is inferred from the URI path variable
+     * @param hotelId Id of the hotel to which to save the room to
+     * @param room Room to be saved
+     * @return Returns an instance of hotel
+     */
     @PostMapping("/{hotelId}/rooms")
     public ResponseEntity<HotelResource> saveRoomToHotel(@PathVariable Long hotelId, @RequestBody Room room){
 
         return new ResponseEntity<>(
                 hotelService.saveRoomToHotel(hotelId, room), HttpStatus.CREATED
+        );
+    }
+
+    /**
+     * Maps to all reservations belonging to a hotel
+     * @param id Id of the hotel to be searched
+     * @return Returns all reservation resources
+     */
+    @GetMapping("/{hotelId}/reservations")
+    public ResponseEntity<Resources<ReservationResource>> getAllReservationsForHotelId(@PathVariable("hotelId") final long id){
+
+        return new ResponseEntity<>(
+                reservationService.getAllReservationsByHotelId(id), HttpStatus.OK
         );
     }
 
