@@ -2,6 +2,7 @@ package com.avempra.hotelreservation.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,21 +32,21 @@ public class User {
     private Long phone;
 
     @Embedded
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Login login;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.AUTO)
     @ElementCollection
     @JoinTable(name = "user_billing")
     private Collection<Billing> billing;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.AUTO)
     @OneToMany(mappedBy = "user",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Collection<Address> address;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "user",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)

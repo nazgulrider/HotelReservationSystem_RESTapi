@@ -5,8 +5,10 @@ import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.resources.HotelResource;
 import com.avempra.hotelreservation.resources.ReservationResource;
+import com.avempra.hotelreservation.resources.RoomResource;
 import com.avempra.hotelreservation.service.HotelService;
 import com.avempra.hotelreservation.service.ReservationService;
+import com.avempra.hotelreservation.service.RoomService;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -34,10 +37,12 @@ public class HotelController {
 
     private HotelService hotelService;
     private ReservationService reservationService;
+    private RoomService roomService;
 
-    public HotelController(HotelService hotelService, ReservationService reservationService) {
+    public HotelController(HotelService hotelService, ReservationService reservationService, RoomService roomService) {
         this.hotelService = hotelService;
         this.reservationService = reservationService;
+        this.roomService = roomService;
     }
 
     /**
@@ -108,7 +113,7 @@ public class HotelController {
      * @return Returns rooms for the hotel with the given Id
      */
     @GetMapping("/{hotelId}/rooms")
-    public ResponseEntity<Resources<Room>> getRoomsForHotelId(@PathVariable Long hotelId){
+    public ResponseEntity<Resources<RoomResource>> getRoomsForHotelId(@PathVariable Long hotelId){
         return new ResponseEntity<>(
                 hotelService.findRoomsByHotelId(hotelId),HttpStatus.OK
         );
@@ -120,7 +125,7 @@ public class HotelController {
      * Saves room object to database and maps it to the hotelId to which it was saved. Hotel to be saved to is inferred from the URI path variable
      * @param hotelId Id of the hotel to which to save the room to
      * @param room Room to be saved
-     * @return Returns an instance of hotel
+     * @return Returns an RoomResource object
      */
     @PostMapping("/{hotelId}/rooms")
     public ResponseEntity<HotelResource> saveRoomToHotel(@PathVariable Long hotelId, @RequestBody Room room){

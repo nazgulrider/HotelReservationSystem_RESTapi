@@ -2,14 +2,17 @@ package com.avempra.hotelreservation.service;
 
 import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Reservation;
+import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.exceptions.DataNotFoundException;
 import com.avempra.hotelreservation.repositories.HotelRepository;
 import com.avempra.hotelreservation.repositories.ReservationRepository;
+import com.avempra.hotelreservation.repositories.RoomRepository;
 import com.avempra.hotelreservation.resources.HotelResource;
 import com.avempra.hotelreservation.resources.ReservationResource;
 import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,10 +26,12 @@ import java.util.stream.Collectors;
 public class ReservationServiceImpl implements ReservationService {
     private ReservationRepository reservationRepository;
     private HotelRepository hotelRepository;
+    private RoomRepository roomRepository;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository, HotelRepository hotelRepository) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, HotelRepository hotelRepository, RoomRepository roomRepository) {
         this.reservationRepository = reservationRepository;
         this.hotelRepository = hotelRepository;
+        this.roomRepository = roomRepository;
     }
 
     /**
@@ -62,8 +67,25 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public ReservationResource saveReservation(Reservation reservation) {
-        //TODO
-        return new ReservationResource(reservationRepository.save(reservation));
+
+        //save reservation to db and store returned reservation into a variable
+        Reservation savedReservation = reservationRepository.save(reservation);
+
+        if(!reservation.getRooms().isEmpty()){
+            //get All rooms in the reservation and store in a variable
+            Collection<Room> rooms = reservation.getRooms();
+
+            //add reservation to all rooms and save rooms to db (explicitly saving rooms to save changes made to the room)
+            List<Room> roomsList = rooms.stream().map(room -> {
+                room.setReservation(savedReservation);
+                room.setAvailable(false);
+                return room;
+            }).collect(Collectors.toList());
+
+            roomRepository.saveAll(roomsList);
+        }
+        //return reservation
+        return new ReservationResource(savedReservation);
     }
 
     /**
@@ -90,6 +112,20 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void deleteReservationById(Long reservationId) {
         if(reservationRepository.existsById(reservationId)){
+            //get reservation-getRooms
+            Collection<Room> rooms = reservationRepository.findById(reservationId)
+                                    .map(Reservation::getRooms)
+                                    .orElseThrow(DataNotFoundException::new);
+
+            //set reservation to null
+            List<Room> noResRooms = rooms.stream().map(room -> {
+                                            room.setReservation(null);
+                                            return room;
+                                        }).collect(Collectors.toList());
+
+            //save rooms to db
+            roomRepository.saveAll(noResRooms);
+            //delete reservation
             reservationRepository.deleteById(reservationId);
         }else {
             throw new DataNotFoundException("Could not delete reservation "+reservationId);

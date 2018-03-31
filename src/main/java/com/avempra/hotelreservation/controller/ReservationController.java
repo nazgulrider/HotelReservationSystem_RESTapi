@@ -40,6 +40,7 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<ReservationResource> makeReservation(@RequestBody Reservation reservation){
+
         return new ResponseEntity<>(
                 reservationService.saveReservation(reservation), HttpStatus.CREATED
         );
@@ -52,7 +53,7 @@ public class ReservationController {
         );
     }
 
-    @PatchMapping("/{reservationId}")
+    @PutMapping("/{reservationId}")
     public ResponseEntity<ReservationResource> updateReservation(@PathVariable("reservationId") final long id,
                                                                  @RequestBody Reservation reservation ){
         return new ResponseEntity<>(

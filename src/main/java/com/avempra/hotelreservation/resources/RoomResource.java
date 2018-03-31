@@ -1,5 +1,6 @@
 package com.avempra.hotelreservation.resources;
 
+import com.avempra.hotelreservation.controller.HotelController;
 import com.avempra.hotelreservation.controller.ReservationController;
 import com.avempra.hotelreservation.entities.Room;
 import lombok.Getter;

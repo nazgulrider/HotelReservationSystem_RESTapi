@@ -2,6 +2,7 @@ package com.avempra.hotelreservation.service;
 import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.resources.HotelResource;
+import com.avempra.hotelreservation.resources.RoomResource;
 import org.springframework.hateoas.Resources;
 
 
@@ -12,7 +13,7 @@ public interface HotelService {
 
     HotelResource saveHotel(Hotel hotel);
 
-    Resources<Room> findRoomsByHotelId(Long hotelId);
+    Resources<RoomResource> findRoomsByHotelId(Long hotelId);
 
     HotelResource saveRoomToHotel(Long hotelId, Room room);
 

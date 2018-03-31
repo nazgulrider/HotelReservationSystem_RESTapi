@@ -4,7 +4,9 @@ import com.avempra.hotelreservation.entities.Hotel;
 import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.exceptions.DataNotFoundException;
 import com.avempra.hotelreservation.repositories.HotelRepository;
+import com.avempra.hotelreservation.repositories.RoomRepository;
 import com.avempra.hotelreservation.resources.HotelResource;
+import com.avempra.hotelreservation.resources.RoomResource;
 import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,11 @@ import java.util.stream.Collectors;
 public class HotelServiceImpl implements HotelService {
 
     private HotelRepository hotelRepository;
+    private RoomRepository roomRepository;
 
-    public HotelServiceImpl(HotelRepository hotelRepository) {
+    public HotelServiceImpl(HotelRepository hotelRepository, RoomRepository roomRepository) {
         this.hotelRepository = hotelRepository;
+        this.roomRepository = roomRepository;
     }
 
     @Override
@@ -45,17 +49,17 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public Resources<Room> findRoomsByHotelId(Long hotelId) {
+    public Resources<RoomResource> findRoomsByHotelId(Long hotelId) {
         Collection<Room> rooms =  hotelRepository.findById(hotelId).map(Hotel::getRooms)
                 .orElseThrow(DataNotFoundException::new);
-        return new Resources<>(rooms);
+        return new Resources<>(rooms.stream().map(RoomResource::new).collect(Collectors.toList()));
     }
 
     @Override
     public HotelResource saveRoomToHotel(Long hotelId, Room room) {
-
-        Hotel savedHotel =  hotelRepository.findById(hotelId).map(hotel -> {
-                hotel.getRooms().add(room);
+        Hotel savedHotel = hotelRepository.findById(hotelId).map(hotel -> {
+            hotel.getRooms().add(room);
+            //room.setHotel(hotel);
             return hotelRepository.save(hotel);
         }).orElseThrow(DataNotFoundException::new); //TODO implement different exception handling for save that doesn't work out
         return new HotelResource(savedHotel);

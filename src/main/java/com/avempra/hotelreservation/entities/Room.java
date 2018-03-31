@@ -1,9 +1,6 @@
 package com.avempra.hotelreservation.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,12 +24,9 @@ public class Room {
     @ManyToOne
     private Reservation reservation;
 
-    //@JsonIgnore
+//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
 //    @ManyToOne
-//    @JoinTable(name = "hotel_rooms",
-//            joinColumns = @JoinColumn(name = "room_id"),
-//            inverseJoinColumns = @JoinColumn(name = "hotel_id")
-//    )
 //    private Hotel hotel;
+
 
 }

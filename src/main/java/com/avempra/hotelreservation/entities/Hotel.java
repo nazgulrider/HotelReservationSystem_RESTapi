@@ -20,7 +20,7 @@ public class Hotel {
     private String name;
     private float rating;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "hotel_rooms",
             joinColumns = @JoinColumn(name = "hotel_id"),
@@ -28,7 +28,7 @@ public class Hotel {
     )
     private Collection<Room> rooms = new ArrayList<>();
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "hotel",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
