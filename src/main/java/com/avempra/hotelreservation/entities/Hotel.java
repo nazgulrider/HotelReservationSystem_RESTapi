@@ -1,6 +1,7 @@
 package com.avempra.hotelreservation.entities;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,11 +22,9 @@ public class Hotel {
     private float rating;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "hotel_rooms",
-            joinColumns = @JoinColumn(name = "hotel_id"),
-            inverseJoinColumns = @JoinColumn(name = "room_id")
-    )
+    @OneToMany(mappedBy = "hotel",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private Collection<Room> rooms = new ArrayList<>();
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -38,4 +37,8 @@ public class Hotel {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
 
+    public Hotel(String name, float rating) {
+        this.name = name;
+        this.rating = rating;
+    }
 }

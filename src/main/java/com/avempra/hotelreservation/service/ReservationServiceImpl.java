@@ -106,7 +106,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     /**
-     * Deletes a reservation by its Id
+     * Deletes a reservation by its Id and updates rooms by removing reservations and setting availability to true
      * @param reservationId The id of the reservation to be deleted
      */
     @Override
@@ -120,6 +120,7 @@ public class ReservationServiceImpl implements ReservationService {
             //set reservation to null
             List<Room> noResRooms = rooms.stream().map(room -> {
                                             room.setReservation(null);
+                                            room.setAvailable(true);
                                             return room;
                                         }).collect(Collectors.toList());
 

@@ -1,6 +1,7 @@
 package com.avempra.hotelreservation.entities;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,9 +25,16 @@ public class Room {
     @ManyToOne
     private Reservation reservation;
 
-//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-//    @ManyToOne
-//    private Hotel hotel;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne
+    private Hotel hotel;
 
 
+    public Room(int roomNumber, RoomType type, Float price, boolean available, Hotel hotel) {
+        this.roomNumber = roomNumber;
+        this.type = type;
+        this.price = price;
+        this.available = available;
+        this.hotel = hotel;
+    }
 }

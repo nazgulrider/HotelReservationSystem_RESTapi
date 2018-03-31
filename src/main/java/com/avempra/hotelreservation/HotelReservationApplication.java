@@ -1,6 +1,8 @@
 package com.avempra.hotelreservation;
 
 import com.avempra.hotelreservation.entities.*;
+import com.avempra.hotelreservation.repositories.HotelRepository;
+import com.avempra.hotelreservation.repositories.RoomRepository;
 import com.avempra.hotelreservation.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +11,10 @@ import org.springframework.context.annotation.Bean;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class HotelReservationApplication {
@@ -17,33 +22,49 @@ public class HotelReservationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HotelReservationApplication.class, args);
 	}
-//
-//	@Bean
-//	CommandLineRunner runner(UserRepository userRepository){
-//
-//		return args -> {
-//
-//
-//			Login user1Login=new Login("eduardo","ramirez");
-//			ArrayList<Billing> user1Billing=new ArrayList<>();
-//			ArrayList<Address> user1Addresses=new ArrayList<>();
-//			ArrayList<Reservation> reservations = new ArrayList<>();
-//			ArrayList<Hotel> user1Hotels = new ArrayList<>();
-//
-//			ArrayList<Room> rooms = new ArrayList<>();
-//			ArrayList<User> users = new ArrayList<>();
-//
-//
-//
-//			User user1= new User(1L,UserRole.CUSTOMER,"Eduardo","Ramirez","rami@gmail.com",7775559980L,user1Login,user1Billing,
-//					user1Addresses,reservations,user1Hotels);
-//			userRepository.save(user1);
-//			users.add(user1);
-//
-//			Hotel hotelMariott = new Hotel(1L,"Mariott",4.5f,rooms,users,reservations,
-//					new Address(1L, AddressType.WORK,"31 Empty ln","corner 1",
-//							"Bedford","TX", 78765));
-//
-//		};
-//	}
+
+
+	//Populate the db with initial data
+	@Bean
+	CommandLineRunner runner(RoomRepository roomRepository, UserRepository userRepository, HotelRepository hotelRepository){
+
+		return args -> {
+
+			Collection<Hotel> hotels = new ArrayList<>();
+			Collection<Room> rooms = new ArrayList<>();
+			Collection<User> users = new ArrayList<>();
+
+			int userCount = 1;
+			while(userCount<11){
+				users.add(new User("User"+userCount, "Shrestha","user"+userCount+"@gmail.com", 4692765544L));
+				userCount++;
+			}
+
+			int count = 1;
+			int count1 =1;
+			int roomNumber = 100;
+
+			while(count<11){
+				Hotel hotel = new Hotel("Hotel"+count,count);
+				hotels.add(hotel);
+
+				while (count1<11){
+					rooms.add(new Room(roomNumber,RoomType.ROYAL,49.99f,true, hotel));
+					roomNumber++;
+					count1++;
+				}
+				count1=1;
+				count++;
+			}
+
+
+
+
+			hotelRepository.saveAll(hotels);
+			roomRepository.saveAll(rooms);
+			userRepository.saveAll(users);
+
+
+		};
+	}
 }

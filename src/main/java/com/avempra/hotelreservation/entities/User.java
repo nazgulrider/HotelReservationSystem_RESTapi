@@ -53,7 +53,10 @@ public class User {
     private Collection<Reservation> reservations;
 
 
-
-
-
+    public User(String firstName, String lastName, String email, Long phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+    }
 }
