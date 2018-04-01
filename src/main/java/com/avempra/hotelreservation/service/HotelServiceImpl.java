@@ -55,15 +55,15 @@ public class HotelServiceImpl implements HotelService {
         return new Resources<>(rooms.stream().map(RoomResource::new).collect(Collectors.toList()));
     }
 
-    @Override
-    public HotelResource saveRoomToHotel(Long hotelId, Room room) {
-        Hotel savedHotel = hotelRepository.findById(hotelId).map(hotel -> {
-            hotel.getRooms().add(room);
-            //room.setHotel(hotel);
-            return hotelRepository.save(hotel);
-        }).orElseThrow(DataNotFoundException::new); //TODO implement different exception handling for save that doesn't work out
-        return new HotelResource(savedHotel);
-    }
+//    @Override
+//    public HotelResource saveRoomToHotel(Long hotelId, Room room) {
+//        Hotel savedHotel = hotelRepository.findById(hotelId).map(hotel -> {
+//            hotel.getRooms().add(room);
+//            //room.setHotel(hotel);
+//            return hotelRepository.save(hotel);
+//        }).orElseThrow(DataNotFoundException::new); //TODO implement different exception handling for save that doesn't work out
+//        return new HotelResource(savedHotel);
+//    }
 
     @Override
     public HotelResource updateHotel(Long hotelId, Hotel hotel) {

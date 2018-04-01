@@ -74,11 +74,13 @@ public class ReservationServiceImpl implements ReservationService {
         if(!reservation.getRooms().isEmpty()){
             //get All rooms in the reservation and store in a variable
             Collection<Room> rooms = reservation.getRooms();
+            Hotel hotel = reservation.getHotel();
 
             //add reservation to all rooms and save rooms to db (explicitly saving rooms to save changes made to the room)
             List<Room> roomsList = rooms.stream().map(room -> {
                 room.setReservation(savedReservation);
                 room.setAvailable(false);
+                room.setHotel(hotel);
                 return room;
             }).collect(Collectors.toList());
 

@@ -15,7 +15,7 @@ public interface HotelService {
 
     Resources<RoomResource> findRoomsByHotelId(Long hotelId);
 
-    HotelResource saveRoomToHotel(Long hotelId, Room room);
+   // HotelResource saveRoomToHotel(Long hotelId, Room room);
 
     HotelResource updateHotel(Long hotelId, Hotel hotel);
 

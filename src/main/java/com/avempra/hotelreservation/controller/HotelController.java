@@ -120,20 +120,20 @@ public class HotelController {
     }
 
 
-    //TODO Refactor this so that it returns an instance of a room instead of the hotel to which the room is saved to
-    /**
-     * Saves room object to database and maps it to the hotelId to which it was saved. Hotel to be saved to is inferred from the URI path variable
-     * @param hotelId Id of the hotel to which to save the room to
-     * @param room Room to be saved
-     * @return Returns an RoomResource object
-     */
-    @PostMapping("/{hotelId}/rooms")
-    public ResponseEntity<HotelResource> saveRoomToHotel(@PathVariable Long hotelId, @RequestBody Room room){
-
-        return new ResponseEntity<>(
-                hotelService.saveRoomToHotel(hotelId, room), HttpStatus.CREATED
-        );
-    }
+//    //TODO Refactor this so that it returns an instance of a room instead of the hotel to which the room is saved to
+//    /**
+//     * Saves room object to database and maps it to the hotelId to which it was saved. Hotel to be saved to is inferred from the URI path variable
+//     * @param hotelId Id of the hotel to which to save the room to
+//     * @param room Room to be saved
+//     * @return Returns an RoomResource object
+//     */
+//    @PostMapping("/{hotelId}/rooms")
+//    public ResponseEntity<HotelResource> saveRoomToHotel(@PathVariable Long hotelId, @RequestBody Room room){
+//
+//        return new ResponseEntity<>(
+//                hotelService.saveRoomToHotel(hotelId, room), HttpStatus.CREATED
+//        );
+//    }
 
     /**
      * Maps to all reservations belonging to a hotel
