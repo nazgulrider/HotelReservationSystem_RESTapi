@@ -16,6 +16,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = User.class)
+@Table(name = "HotelUser")
 public class User {
 
     @Id
