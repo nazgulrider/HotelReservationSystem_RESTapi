@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/reservations", produces = "application/hal+json")
+@RequestMapping(value = "/api/reservations", produces = "application/hal+json")
 public class ReservationController {
 
     private ReservationService reservationService;

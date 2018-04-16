@@ -33,7 +33,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author Prashanta K Shrestha
  */
 @RestController
-@RequestMapping(value = "/hotels",produces = "application/hal+json")
+@RequestMapping(value = "/api/hotels",produces = "application/hal+json")
 public class HotelController {
 
     private HotelService hotelService;

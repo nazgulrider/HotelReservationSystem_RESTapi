@@ -20,6 +20,8 @@ public class Hotel {
 
     private String name;
     private float rating;
+    private String url;
+    private String description;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "hotel",
@@ -37,8 +39,11 @@ public class Hotel {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
 
-    public Hotel(String name, float rating) {
+    public Hotel(String name, float rating, String url, String description) {
         this.name = name;
         this.rating = rating;
+        this.url = url;
+        this.description = description;
     }
+
 }
