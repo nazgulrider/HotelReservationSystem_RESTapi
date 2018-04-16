@@ -45,7 +45,7 @@ public class HotelReservationApplication {
 			int roomNumber = 100;
 
 			while(count<11){
-				Hotel hotel = new Hotel("Hotel"+count,count,"../../assets/images/hotel-"+count+".jpg","The best Hotel in the whole world");
+				Hotel hotel = new Hotel("Hotel"+count,count,"hotel-"+count+".jpg","The best Hotel in the whole world");
 				hotels.add(hotel);
 
 				while (count1<11){
