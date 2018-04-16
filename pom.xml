@@ -76,6 +76,10 @@
             <artifactId>spring-hateoas</artifactId>
             <version>0.23.0.RELEASE</version>
         </dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
     </dependencies>
 
 	<build>
