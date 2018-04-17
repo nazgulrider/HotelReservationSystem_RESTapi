@@ -36,7 +36,7 @@ public class HotelReservationApplication {
 
 			int userCount = 1;
 			while(userCount<11){
-				users.add(new User("User"+userCount, "Shrestha","user"+userCount+"@gmail.com", 4692765544L));
+				users.add(new User(new Login("user"+userCount, "admin"),"User"+userCount, "Tomato"+userCount,"user"+userCount+"@gmail.com", 4692765544L));
 				userCount++;
 			}
 

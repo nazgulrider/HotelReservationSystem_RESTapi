@@ -54,7 +54,8 @@ public class User {
     private Collection<Reservation> reservations;
 
 
-    public User(String firstName, String lastName, String email, Long phone) {
+    public User(Login login, String firstName, String lastName, String email, Long phone) {
+        this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
