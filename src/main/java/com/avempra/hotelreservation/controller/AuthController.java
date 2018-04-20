@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
+/**
+ * This endpoint checks the authentication status of a user
+ */
 @RestController
 public class AuthController {
 

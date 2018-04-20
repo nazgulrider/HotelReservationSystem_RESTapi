@@ -32,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
+                //here we are ignoring all static resources with bundle and jpg on them
                 .antMatchers("/*.bundle.*")
                 .antMatchers("/*.jpg*");
     }
@@ -44,14 +45,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/", "/home", "/login").permitAll()
-                .anyRequest().authenticated();
-//                .and()
-//                .formLogin()
-
+                .antMatchers("/api/**").authenticated() //all api requests are protected
+                .anyRequest().permitAll() //all other requests are permitted. Angular should handle route protection for the frontend
+                .and()
+                .logout()
+                .logoutSuccessUrl("/");
 
     }
-
-
 
 }
