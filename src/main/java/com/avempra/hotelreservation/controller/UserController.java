@@ -66,4 +66,11 @@ public class UserController {
         );
     }
 
+    @GetMapping("/user/{username}")
+    public ResponseEntity<UserResource> getUserByUsername(@PathVariable("username") final String username) {
+        return new ResponseEntity<>(
+                userService.findUserByUsername(username), HttpStatus.OK
+        );
+    }
+
 }

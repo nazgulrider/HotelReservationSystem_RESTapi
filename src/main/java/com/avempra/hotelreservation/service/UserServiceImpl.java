@@ -57,5 +57,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public UserResource findUserByUsername(String username) {
+        return userRepository.findByLogin_UserName(username)
+                .map(UserResource::new)
+                .orElseThrow(DataNotFoundException::new);
+    }
+
 
 }

@@ -31,6 +31,7 @@ public class User {
     private String lastName;
     private String email;
     private Long phone;
+    private String profileImgUrl;
 
     @Embedded
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -54,11 +55,12 @@ public class User {
     private Collection<Reservation> reservations;
 
 
-    public User(Login login, String firstName, String lastName, String email, Long phone) {
+    public User(Login login, String firstName, String lastName, String email, Long phone, String profileImgUrl) {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+        this.profileImgUrl = profileImgUrl;
     }
 }

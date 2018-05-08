@@ -18,8 +18,8 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant created;
-    private Date checkIn;
-    private Date checkOut;
+    private long checkIn;
+    private long checkOut;
     private Boolean paid;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

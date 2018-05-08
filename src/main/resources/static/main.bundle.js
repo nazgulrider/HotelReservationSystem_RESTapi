@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<app-navbar></app-navbar>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "\r\n<app-navbar *ngIf =\"auth.isAuthenticated()\"></app-navbar>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -38,6 +38,7 @@ module.exports = ""
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_service__ = __webpack_require__("./src/app/shared/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_user_service__ = __webpack_require__("./src/app/shared/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49,9 +50,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(auth) {
+    function AppComponent(auth, userService) {
         this.auth = auth;
+        this.userService = userService;
         this.title = 'app';
     }
     AppComponent = __decorate([
@@ -60,7 +63,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_2__shared_user_service__["a" /* UserService */]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -78,26 +81,32 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__hotel_hotel_component__ = __webpack_require__("./src/app/hotel/hotel.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__hotel_hotel_list_hotel_list_component__ = __webpack_require__("./src/app/hotel/hotel-list/hotel-list.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__hotel_hotel_details_hotel_details_component__ = __webpack_require__("./src/app/hotel/hotel-details/hotel-details.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__hotel_hotel_service__ = __webpack_require__("./src/app/hotel/hotel.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ngx_cookie_service__ = __webpack_require__("./node_modules/ngx-cookie-service/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_platform_browser_animations__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_auth_service__ = __webpack_require__("./src/app/shared/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__interceptor__ = __webpack_require__("./src/app/interceptor.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__home_home_login_home_login_component__ = __webpack_require__("./src/app/home/home-login/home-login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__navbar_navbar_component__ = __webpack_require__("./src/app/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__shared_auth_guard_service__ = __webpack_require__("./src/app/shared/auth-guard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__ = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mydaterangepicker__ = __webpack_require__("./node_modules/mydaterangepicker/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__hotel_hotel_component__ = __webpack_require__("./src/app/hotel/hotel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__hotel_hotel_details_hotel_details_component__ = __webpack_require__("./src/app/hotel/hotel-details/hotel-details.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__hotel_hotel_service__ = __webpack_require__("./src/app/hotel/hotel.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ngx_cookie_service__ = __webpack_require__("./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_animations__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shared_auth_service__ = __webpack_require__("./src/app/shared/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__interceptor__ = __webpack_require__("./src/app/interceptor.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__home_home_login_home_login_component__ = __webpack_require__("./src/app/home/home-login/home-login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__navbar_navbar_component__ = __webpack_require__("./src/app/navbar/navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__shared_auth_guard_service__ = __webpack_require__("./src/app/shared/auth-guard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__shared_user_service__ = __webpack_require__("./src/app/shared/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__hotel_room_list_room_list_component__ = __webpack_require__("./src/app/hotel/room-list/room-list.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -118,38 +127,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var appRoutes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_5__home_home_component__["a" /* HomeComponent */] },
-    { path: 'hotels', component: __WEBPACK_IMPORTED_MODULE_6__hotel_hotel_component__["a" /* HotelComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_17__shared_auth_guard_service__["a" /* AuthGuard */]] }
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__home_home_component__["a" /* HomeComponent */], children: [
+            { path: 'login', component: __WEBPACK_IMPORTED_MODULE_16__home_home_login_home_login_component__["a" /* HomeLoginComponent */] }
+        ] },
+    { path: 'hotels', component: __WEBPACK_IMPORTED_MODULE_8__hotel_hotel_component__["a" /* HotelComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_18__shared_auth_guard_service__["a" /* AuthGuard */]], children: [
+            { path: ':id/detail', component: __WEBPACK_IMPORTED_MODULE_9__hotel_hotel_details_hotel_details_component__["a" /* HotelDetailsComponent */] },
+            { path: 'rooms', component: __WEBPACK_IMPORTED_MODULE_20__hotel_room_list_room_list_component__["a" /* RoomListComponent */] }
+        ] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__hotel_hotel_component__["a" /* HotelComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__hotel_hotel_list_hotel_list_component__["a" /* HotelListComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__hotel_hotel_details_hotel_details_component__["a" /* HotelDetailsComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__home_home_login_home_login_component__["a" /* HomeLoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_16__navbar_navbar_component__["a" /* NavbarComponent */]
+                __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__hotel_hotel_component__["a" /* HotelComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__hotel_hotel_details_hotel_details_component__["a" /* HotelDetailsComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__home_home_login_home_login_component__["a" /* HomeLoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__navbar_navbar_component__["a" /* NavbarComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__hotel_room_list_room_list_component__["a" /* RoomListComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */].forRoot(appRoutes),
-                __WEBPACK_IMPORTED_MODULE_9__angular_common_http__["c" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_12__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
+                __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */].forRoot(appRoutes),
+                __WEBPACK_IMPORTED_MODULE_10__angular_common_http__["c" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_5_mydaterangepicker__["MyDateRangePickerModule"]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_17__shared_auth_guard_service__["a" /* AuthGuard */],
-                __WEBPACK_IMPORTED_MODULE_10__hotel_hotel_service__["a" /* HotelService */],
-                __WEBPACK_IMPORTED_MODULE_11_ngx_cookie_service__["a" /* CookieService */],
-                __WEBPACK_IMPORTED_MODULE_13__shared_auth_service__["a" /* AuthService */],
-                { provide: __WEBPACK_IMPORTED_MODULE_9__angular_common_http__["a" /* HTTP_INTERCEPTORS */], useClass: __WEBPACK_IMPORTED_MODULE_14__interceptor__["a" /* XhrInterceptor */], multi: true }
+                __WEBPACK_IMPORTED_MODULE_18__shared_auth_guard_service__["a" /* AuthGuard */],
+                __WEBPACK_IMPORTED_MODULE_11__hotel_hotel_service__["a" /* HotelService */],
+                __WEBPACK_IMPORTED_MODULE_12_ngx_cookie_service__["a" /* CookieService */],
+                __WEBPACK_IMPORTED_MODULE_14__shared_auth_service__["a" /* AuthService */],
+                { provide: __WEBPACK_IMPORTED_MODULE_10__angular_common_http__["a" /* HTTP_INTERCEPTORS */], useClass: __WEBPACK_IMPORTED_MODULE_15__interceptor__["a" /* XhrInterceptor */], multi: true },
+                __WEBPACK_IMPORTED_MODULE_19__shared_user_service__["a" /* UserService */]
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
@@ -162,14 +179,14 @@ var AppModule = /** @class */ (function () {
 /***/ "./src/app/home/home-login/home-login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"popup\">\r\n  <div class=\"popup__content col-md-8 col-lg-6\">\r\n    <!-- <div class=\"alert alert-danger\" [hidden]=\"!error\">\r\n      There was a problem logging in. Please try again.\r\n    </div> -->\r\n    <form class=\"form offset-md-1 col-md-10\" (ngSubmit)=\"login()\">\r\n      <div class=\"form__group\">\r\n        <label class=\"form__label\" for=\"username\">Username</label>\r\n        <input type=\"text\" class=\"form__input\" placeholder=\"Username\" name=\"username\" [(ngModel)]=\"credentials.username\" required/>\r\n      </div>\r\n\r\n      <div class=\"form__group\">\r\n        <label class=\"form__label\" for=\"password\">Password</label>\r\n        <input type=\"password\" class=\"form__input\" placeholder=\"Password\" name=\"password\" [(ngModel)]=\"credentials.password\" required/>\r\n      </div>\r\n      <button type=\"submit\" class=\"btn form-control btn-text\">Submit</button>\r\n    </form>  \r\n    \r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"popup\">\r\n\r\n  <div class=\"popup__content col-md-8 col-lg-6\">\r\n\r\n\r\n    <div class=\"alert alert-danger\" [hidden]=\"!error\">\r\n      There was a problem logging in. Please try again.\r\n    </div>\r\n    <button type=\"button close\" class=\"close\" (click)=\"onCloseHandled()\">&times;</button>\r\n\r\n    <form class=\"form offset-md-1 col-md-10\" (ngSubmit)=\"login()\">\r\n      <div class=\"form__group\">\r\n        <label class=\"form__label\" for=\"username\">Username</label>\r\n        <input type=\"text\" class=\"form__input\" placeholder=\"Username\" name=\"username\" [(ngModel)]=\"credentials.username\" required/>\r\n      </div>\r\n\r\n      <div class=\"form__group\">\r\n        <label class=\"form__label\" for=\"password\">Password</label>\r\n        <input type=\"password\" class=\"form__input\" placeholder=\"Password\" name=\"password\" [(ngModel)]=\"credentials.password\" required/>\r\n      </div>\r\n      <button type=\"submit\" class=\"btn form-control btn-text\">Submit</button>\r\n    </form>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/home/home-login/home-login.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".popup__content {\n  height: auto;\n  background-color: rgba(255, 255, 255, 0.9); }\n\n.form {\n  margin-top: 3rem;\n  margin-bottom: 5rem; }\n\n.form__group {\n    margin-bottom: 2rem; }\n\n.form__input {\n    width: 100%;\n    font-size: 1.5rem;\n    padding: 1rem 2rem;\n    border-radius: 2px;\n    border: none;\n    border-bottom: 3px solid transparent; }\n\n.form__input:focus {\n      outline: none;\n      -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);\n              box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);\n      border-bottom: 3px solid #55c57a; }\n\n.form__input:focus:invalid {\n      border-bottom: 3px solid #d36e48; }\n\n.form__label {\n    display: block;\n    font-size: 2rem;\n    text-transform: uppercase; }\n\n.btn {\n  background-color: #d36e48;\n  color: #fff;\n  font-size: 1.3rem;\n  margin-top: 2rem;\n  padding: 1rem;\n  border-radius: 3px; }\n\n.btn-text {\n    padding: 1rem; }\n"
+module.exports = ".popup__content {\n  height: auto;\n  background-color: rgba(255, 255, 255, 0.9);\n  padding-top: 3rem;\n  padding-bottom: 3rem; }\n\n.alert {\n  text-align: center; }\n\n.close {\n  padding-right: 1rem;\n  font-size: 3rem; }\n\n.form {\n  margin-top: 3rem;\n  margin-bottom: 5rem; }\n\n.form__group {\n    margin-bottom: 2rem; }\n\n.form__input {\n    width: 100%;\n    font-size: 1.5rem;\n    padding: 1rem 2rem;\n    border-radius: 2px;\n    border: none;\n    border-bottom: 3px solid transparent; }\n\n.form__input:focus {\n      outline: none;\n      -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);\n              box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);\n      border-bottom: 3px solid #55c57a; }\n\n.form__input:focus:invalid {\n      border-bottom: 3px solid #d36e48; }\n\n.form__label {\n    display: block;\n    font-size: 2rem;\n    text-transform: uppercase; }\n\n.btn {\n  background-color: #d36e48;\n  color: #fff;\n  font-size: 1.3rem;\n  margin-top: 2rem;\n  padding: 1rem;\n  border-radius: 3px; }\n\n.btn-text {\n    padding: 1rem; }\n"
 
 /***/ }),
 
@@ -200,24 +217,30 @@ var HomeLoginComponent = /** @class */ (function () {
         this.auth = auth;
         this.http = http;
         this.router = router;
+        this.close = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
         this.credentials = { username: '', password: '' };
     }
     HomeLoginComponent.prototype.ngOnInit = function () {
     };
     HomeLoginComponent.prototype.login = function () {
         var _this = this;
-        this.auth.authenticate(this.credentials, function () {
-            _this.router.navigate(['hotels']);
-        });
-        return false;
+        this.auth.authenticate(this.credentials, function () { _this.router.navigate(['hotels']); }, function () { _this.error = _this.auth.error; });
     };
+    HomeLoginComponent.prototype.onCloseHandled = function () {
+        this.error = null;
+        this.router.navigate(['home']);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */])
+    ], HomeLoginComponent.prototype, "close", void 0);
     HomeLoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-home-login',
             template: __webpack_require__("./src/app/home/home-login/home-login.component.html"),
             styles: [__webpack_require__("./src/app/home/home-login/home-login.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]])
     ], HomeLoginComponent);
     return HomeLoginComponent;
 }());
@@ -229,7 +252,7 @@ var HomeLoginComponent = /** @class */ (function () {
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cont\">\r\n  <div class=\"home\">\r\n  </div>\r\n</div>\r\n<div class=\"home-description container\">\r\n\r\n  <h1 class=\"home-heading\">\r\n    <span class=\"home-heading-main\">Comfort</span>\r\n    <span class=\"home-heading-sub\">find a good night's sleep</span>\r\n  </h1>\r\n  <p class=\"home-para\">Find the luxurious getaway that you've always dreamed of. Login with user1 as username and admin as password destination Lorem ipsum\r\n    dolor sit amet consectetur, adipisicing elit. Deleniti eveniet error culpa sit eius rerum minima.\r\n  </p>\r\n  <a routerLink=\"\" (click)=\"hide=false\" class=\"btn btn--white\">Find your getaway</a>\r\n</div>\r\n<app-home-login [hidden]=\"hide\"></app-home-login>"
+module.exports = "<div class=\"cont\">\r\n  <div class=\"home\">\r\n  </div>\r\n</div>\r\n<div class=\"home-description container\">\r\n\r\n  <h1 class=\"home-heading\">\r\n    <span class=\"home-heading-main\">Comfort</span>\r\n    <span class=\"home-heading-sub\">find a good night's sleep</span>\r\n  </h1>\r\n  <p class=\"home-para\">Find the luxurious getaway that you've always dreamed of. Login with user1 as username and admin as password destination Lorem ipsum\r\n    dolor sit amet consectetur, adipisicing elit. Deleniti eveniet error culpa sit eius rerum minima.\r\n  </p>\r\n  <a routerLink=\"/home/login\" class=\"btn btn--white\">Find your getaway</a>\r\n  \r\n</div>\r\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -262,6 +285,9 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
     };
+    HomeComponent.prototype.onCloseHandled = function () {
+        this.hide = true;
+    };
     HomeComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-home',
@@ -280,14 +306,14 @@ var HomeComponent = /** @class */ (function () {
 /***/ "./src/app/hotel/hotel-details/hotel-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  hotel-details works!\r\n</p>\r\n"
+module.exports = "<div class=\"popup\" (click)=\"onCloseHandled()\">\r\n\r\n  <div class=\"popup__content col-lg-12\">\r\n    <div class=\"card col-lg-3 offset-lg-1\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/room-1.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker1\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Royal</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>King size bed</li>\r\n            <hr>\r\n            <li>24 hour room service</li>\r\n            <hr>\r\n            <li>Royal perks</li>\r\n            <hr>\r\n            <li>In-room swimming pool</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker1\">\r\n        <!-- <label for=\"start\">Start</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"start\" id=\"start\" ngbDatepicker #s=\"ngbDatepicker\" (click)=\"s.toggle()\">\r\n        <hr>\r\n        <label for=\"end\">End</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"end\" id=\"end\" ngbDatepicker #e=\"ngbDatepicker\" (click)=\"e.toggle()\"> -->\r\n        <form #f=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" (dateRangeChanged)=\"onDateRangeChanged($event)\" [options]=\"myDateRangePickerOptions\" [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n\r\n      </div>\r\n      <div class=\"card__button\">\r\n        <button (click)=\"onCheckAvailable(1)\" class=\"btn\" [hidden]=\"showDatePicker1\">Book Now</button>\r\n        <button (click)=\"findAvailableRooms(1)\" class=\"btn\" [hidden]=\"!showDatePicker1\" [disabled] =\"!f.valid\">Check Availability</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- ------------------------------------------------------------------------------------------------------------------------ -->\r\n\r\n    <div class=\"card col-lg-3\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/royal1.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker2\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Presidential</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>Queen size bed</li>\r\n            <hr>\r\n            <li>24 hour room service</li>\r\n            <hr>\r\n            <li>Presidential perks</li>\r\n            <hr>\r\n            <li>In-room jacuzzi</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker2\">\r\n        <!-- <label for=\"start\">Start</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"start2\" id=\"start2\" ngbDatepicker #s2=\"ngbDatepicker\" (click)=\"s2.toggle()\">\r\n        <hr>\r\n        <label for=\"end\">End</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"end2\" id=\"end2\" ngbDatepicker #e2=\"ngbDatepicker\" (click)=\"e2.toggle()\"> -->\r\n        <form #myForm=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" [options]=\"myDateRangePickerOptions\" [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n      </div>\r\n      <div class=\"card__button\">\r\n        <a (click)=\"onCheckAvailable(2)\" class=\"btn\" [hidden]=\"showDatePicker2\">Book Now</a>\r\n        <a (click)=\"findAvailableRooms(2)\" class=\"btn\" [hidden]=\"!showDatePicker2\">Check Availability</a>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- -------------------------------------------------------------------------------------------------------------------------- -->\r\n\r\n    <div class=\"card col-lg-3\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/room-3.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker3\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Deluxe</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>Twin size bed</li>\r\n            <hr>\r\n            <li>Complimentary breakfast</li>\r\n            <hr>\r\n            <li>Deluxe perks</li>\r\n            <hr>\r\n            <li>In-room bathtub</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker3\">\r\n        <!-- <label for=\"start\">Start</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"start3\" id=\"start3\" ngbDatepicker #s3=\"ngbDatepicker\" (click)=\"s3.toggle()\">\r\n        <hr>\r\n        <label for=\"end\">End</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"end3\" id=\"end3\" ngbDatepicker #e3=\"ngbDatepicker\" (click)=\"e3.toggle()\"> -->\r\n\r\n        <form #myForm=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" [options]=\"myDateRangePickerOptions\" [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n\r\n      </div>\r\n      <div class=\"card__button\">\r\n        <a (click)=\"onCheckAvailable(3)\" class=\"btn\" [hidden]=\"showDatePicker3\">Book Now</a>\r\n        <a (click)=\"findAvailableRooms(3)\" class=\"btn\" [hidden]=\"!showDatePicker3\">Check Availability</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/hotel/hotel-details/hotel-details.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".card {\n  display: inline-block;\n  padding: 0;\n  border: none;\n  border-radius: .5rem;\n  z-index: 50;\n  height: 58rem; }\n  .card:not(:last-of-type) {\n    margin-right: 6rem; }\n  .card__img {\n    width: 100%;\n    height: 25rem;\n    -o-object-fit: cover;\n       object-fit: cover;\n    overflow: hidden;\n    border-top-left-radius: .5rem;\n    border-top-right-radius: .5rem; }\n  .card__description {\n    padding: 1rem;\n    margin-bottom: 1rem; }\n  .card__description--title {\n      margin-top: 1rem;\n      margin-bottom: 2rem;\n      text-transform: uppercase;\n      text-align: center;\n      letter-spacing: .5rem; }\n  .card__description--content ul {\n      font-size: 1.3rem;\n      font-weight: 600;\n      list-style-type: none; }\n  .card__description--content ul li {\n        text-transform: uppercase;\n        text-align: center; }\n  .card__date {\n    margin-top: 1.5rem;\n    margin-bottom: 1.5rem;\n    text-align: center;\n    font-size: 1.5rem;\n    text-transform: uppercase; }\n  .card__date input {\n      width: 100%;\n      display: block;\n      text-align: center;\n      padding-top: 1rem;\n      padding-bottom: 1rem;\n      border: none;\n      font-size: 1.5rem; }\n  .card__date input:last-of-type {\n        margin-bottom: 6rem; }\n  .card__button {\n    padding: 0 2rem 2rem 2rem; }\n  .btn {\n  background-color: #d36e48;\n  width: 100%;\n  border-radius: 50px;\n  text-transform: uppercase;\n  font-weight: 600;\n  padding: 1rem 0rem;\n  font-size: 1.5rem;\n  text-align: center; }\n  .popup {\n  overflow: auto; }\n  .popup__content {\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n    background-color: transparent; }\n  @media screen and (max-width: 800px) {\n  .popup__content {\n    position: absolute;\n    top: 0;\n    left: 0;\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0); }\n  .card {\n    margin-top: 2rem; }\n    .card:last-child {\n      margin-bottom: 2rem; } }\n"
 
 /***/ }),
 
@@ -297,6 +323,9 @@ module.exports = ""
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HotelDetailsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hotel_model__ = __webpack_require__("./src/app/hotel/hotel.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hotel_service__ = __webpack_require__("./src/app/hotel/hotel.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -307,70 +336,101 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var HotelDetailsComponent = /** @class */ (function () {
-    function HotelDetailsComponent() {
+    function HotelDetailsComponent(hotelService, router, route) {
+        this.hotelService = hotelService;
+        this.router = router;
+        this.route = route;
+        this.close = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
+        this.showDatePicker1 = false;
+        this.showDatePicker2 = false;
+        this.showDatePicker3 = false;
+        this.filteredRooms = [];
+        this.myDateRangePickerOptions = {
+            dateFormat: 'dd/mm/yyyy',
+            inline: true,
+            indicateInvalidDateRange: true,
+            markCurrentDay: true,
+        };
+        this.model = null;
     }
     HotelDetailsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var id = this.route.snapshot.params['id'];
+        this.hotelService.getRooms(id).subscribe(function (rooms) {
+            _this.hotelService.rooms = rooms;
+            console.log("rooms" + rooms);
+        }, function (error) { return console.log(error); });
     };
+    HotelDetailsComponent.prototype.onDateRangeChanged = function (event) {
+        console.log('jsdate: ' + event.beginEpoc + " - " + event.endJsDate);
+        this.start = event.beginEpoc;
+        this.end = event.endEpoc;
+        this.hotelService.filteredRooms = this.hotelService.rooms.filter(function (room) {
+            return room.reservation === null || !(room.reservation.checkIn >= event.beginEpoc && room.reservation.checkIn <= event.endEpoc);
+        });
+        console.log(this.filteredRooms);
+    };
+    HotelDetailsComponent.prototype.onCloseHandled = function () {
+        this.router.navigate(['hotels']);
+        this.showDatePicker1 = false;
+        this.showDatePicker2 = false;
+        this.showDatePicker3 = false;
+    };
+    HotelDetailsComponent.prototype.onCheckAvailable = function (id) {
+        switch (id) {
+            case 1:
+                this.showDatePicker1 = true;
+                break;
+            case 2:
+                this.showDatePicker2 = true;
+                break;
+            case 3:
+                this.showDatePicker3 = true;
+                break;
+            default:
+                break;
+        }
+    };
+    HotelDetailsComponent.prototype.findAvailableRooms = function (id) {
+        this.router.navigate(['hotels/rooms']);
+        console.log('Value: ', this.model);
+        console.log(this.hotelService.rooms.length);
+        if (this.hotelService.rooms.length !== 0) {
+            this.hotelService.rooms.forEach(function (room) {
+                if (room.reservation === null) {
+                    console.log(room);
+                }
+            });
+        }
+    };
+    //cancel the click event from propagating to the parent div which triggers close event on the window
+    HotelDetailsComponent.prototype.onCardClicked = function (e) {
+        if (e) {
+            e.stopPropagation();
+        }
+        return false;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__hotel_model__["a" /* Hotel */])
+    ], HotelDetailsComponent.prototype, "hotel", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */])
+    ], HotelDetailsComponent.prototype, "close", void 0);
     HotelDetailsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-hotel-details',
             template: __webpack_require__("./src/app/hotel/hotel-details/hotel-details.component.html"),
             styles: [__webpack_require__("./src/app/hotel/hotel-details/hotel-details.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__hotel_service__["a" /* HotelService */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]])
     ], HotelDetailsComponent);
     return HotelDetailsComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/hotel/hotel-list/hotel-list.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\r\n  hotel-list works!\r\n</p>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/hotel/hotel-list/hotel-list.component.scss":
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/hotel/hotel-list/hotel-list.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HotelListComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var HotelListComponent = /** @class */ (function () {
-    function HotelListComponent() {
-    }
-    HotelListComponent.prototype.ngOnInit = function () {
-    };
-    HotelListComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-hotel-list',
-            template: __webpack_require__("./src/app/hotel/hotel-list/hotel-list.component.html"),
-            styles: [__webpack_require__("./src/app/hotel/hotel-list/hotel-list.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], HotelListComponent);
-    return HotelListComponent;
 }());
 
 
@@ -380,7 +440,7 @@ var HotelListComponent = /** @class */ (function () {
 /***/ "./src/app/hotel/hotel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"hotel col-lg-8  offset-lg-2\" [@listAnimation]=\"hotels.length\">\r\n  <ul>\r\n    <div class=\"hotel-card\" *ngFor=\"let hotel of hotels\" (click)=\"openModal()\">\r\n      <img class=\"hotel-card--img\" src=\"{{hotel.url}}\">\r\n      <div class=\"hotel-card--text col-md-8 col-xs-12\">\r\n        <span class=\"hotel-card--text__heading\">\r\n          {{hotel.name}}\r\n        </span>\r\n        <span class=\"hotel-card--text__info\">\r\n          Hotel Rating: {{hotel.rating}} {{hotel.address}}\r\n        </span>\r\n        <span class=\"hotel-card--text__description\">\r\n          {{hotel.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis in praesentium, mollitia eius tempore\r\n          culpa ab modi reiciendis eveniet sapiente quaerat commodi incidunt architecto consequatur dolorem eos, perspiciatis\r\n          earum quae?\r\n        </span>\r\n      </div>\r\n    </div>\r\n  </ul>\r\n</div>  \r\n<div class=\"popup\" [ngStyle]=\"{'opacity':opacity,'visibility':visibility}\">\r\n  <div class=\"popup__content\" [ngStyle]=\"{'opacity':opacity,'visibility':visibility}\">\r\n    <div class=\"popup__left\">\r\n      <img src=\"../../assets/images/room-1.jpg\" alt=\"Room\" class=\"popup__img\">\r\n      <img src=\"../../assets/images/room-2.jpg\" alt=\"Room\" class=\"popup__img\">\r\n      <img src=\"../../assets/images/room-3.jpg\" alt=\"Room\" class=\"popup__img\">\r\n    </div>\r\n    <div class=\"popup__right\">\r\n      <button type=\"button\" class=\"close\" (click)=\"onCloseHandled()\">&times;</button>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"hotel col-lg-8  offset-lg-2\" [@listAnimation]=\"hotels.length\">\r\n  <ul>\r\n    <div class=\"hotel-card\" *ngFor=\"let hotel of hotels\" (click)=\"select(hotel)\">\r\n      <img class=\"hotel-card--img\" src=\"{{hotel.url}}\">\r\n      <div class=\"hotel-card--text col-md-8 col-xs-12\">\r\n        <span class=\"hotel-card--text__heading\">\r\n          {{hotel.name}}\r\n        </span>\r\n        <span class=\"hotel-card--text__info\">\r\n          Hotel Rating: {{hotel.rating}} {{hotel.address}}\r\n        </span>\r\n        <span class=\"hotel-card--text__description\">\r\n          {{hotel.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis in praesentium, mollitia eius tempore\r\n          culpa ab modi reiciendis eveniet sapiente quaerat commodi incidunt architecto consequatur dolorem eos, perspiciatis\r\n          earum quae?\r\n        </span>\r\n      </div>\r\n    </div>\r\n  </ul>\r\n</div>  \r\n<!-- <app-hotel-details [hotel]=\"selectedHotel\" (close)=\"onClose()\"> </app-hotel-details> -->\r\n<router-outlet> </router-outlet>"
 
 /***/ }),
 
@@ -399,6 +459,7 @@ module.exports = ".hotel {\n  margin-top: 5.7rem; }\n  .hotel-card {\n    height
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hotel_service__ = __webpack_require__("./src/app/hotel/hotel.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_animations__ = __webpack_require__("./node_modules/@angular/animations/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -411,33 +472,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HotelComponent = /** @class */ (function () {
-    function HotelComponent(hotelService) {
+    function HotelComponent(hotelService, route) {
         this.hotelService = hotelService;
+        this.route = route;
         this.hotels = [];
         this.links = [];
-        this.opacity = 0;
-        this.visibility = 'hidden';
+        this.rooms = [];
     }
     HotelComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (this.hotels.length === 0) {
+        //check to see whether already fetched hotels exist
+        if (this.hotelService.hotels.length === 0) {
             this.hotelService.getHotels().subscribe(function (hotels) {
-                _this.hotels = hotels; //takes result and extracts hotel objects from it
+                //assign hotels from fetched data to service 
+                _this.hotelService.hotels = hotels;
+                _this.hotels = _this.hotelService.hotels;
                 console.log(_this.hotels);
             }, function (error) { return console.log(error); });
         }
+        else {
+            this.hotels = this.hotelService.hotels;
+        }
     };
-    HotelComponent.prototype.slect = function (hotel) {
+    HotelComponent.prototype.select = function (hotel) {
         this.selectedHotel = hotel;
+        this.route.navigate(['hotels/' + hotel.id + '/detail']);
     };
-    HotelComponent.prototype.openModal = function () {
-        this.opacity = 1;
-        this.visibility = 'visible';
-    };
-    HotelComponent.prototype.onCloseHandled = function () {
-        this.opacity = 0;
-        this.visibility = 'hidden';
+    HotelComponent.prototype.onClose = function () {
+        this.selectedHotel = null;
     };
     HotelComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -459,9 +523,24 @@ var HotelComponent = /** @class */ (function () {
                 ])
             ]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__hotel_service__["a" /* HotelService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__hotel_service__["a" /* HotelService */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]])
     ], HotelComponent);
     return HotelComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/hotel/hotel.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Hotel; });
+var Hotel = /** @class */ (function () {
+    function Hotel() {
+    }
+    return Hotel;
 }());
 
 
@@ -488,23 +567,82 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var HotelService = /** @class */ (function () {
     function HotelService(http) {
         this.http = http;
-        this.hotels = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__["a" /* BehaviorSubject */]([]);
+        this.hotels = [];
+        this.rooms = [];
+        this.filteredRooms = [];
     }
     HotelService.prototype.getHotels = function () {
-        return this.http.get('/api/hotels')
-            .map(function (result) {
+        return this.http.get('/api/hotels').map(function (result) {
             return result.content.map(function (content) { return content.hotel; });
         });
     };
+    HotelService.prototype.getRooms = function (hotelId) {
+        return this.http.get('/api/hotels/' + hotelId + '/rooms').map(function (result) {
+            return result.content.map(function (content) { return content.room; });
+        });
+    };
     HotelService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
     ], HotelService);
     return HotelService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/hotel/room-list/room-list.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"popup\">\n  <div class=\"popup__content\">\n    <ul>\n      <div style=\"color: white;\" *ngFor=\"let room of rooms\">\n        {{room.roomNumber}} + {{room.type}}\n      </div>\n    </ul>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/hotel/room-list/room-list.component.scss":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/hotel/room-list/room-list.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoomListComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hotel_service__ = __webpack_require__("./src/app/hotel/hotel.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var RoomListComponent = /** @class */ (function () {
+    function RoomListComponent(hotelService) {
+        this.hotelService = hotelService;
+        this.rooms = hotelService.filteredRooms;
+    }
+    RoomListComponent.prototype.ngOnInit = function () {
+    };
+    RoomListComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-room-list',
+            template: __webpack_require__("./src/app/hotel/room-list/room-list.component.html"),
+            styles: [__webpack_require__("./src/app/hotel/room-list/room-list.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__hotel_service__["a" /* HotelService */]])
+    ], RoomListComponent);
+    return RoomListComponent;
 }());
 
 
@@ -534,7 +672,7 @@ var XhrInterceptor = /** @class */ (function () {
         return next.handle(xhr);
     };
     XhrInterceptor = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])()
     ], XhrInterceptor);
     return XhrInterceptor;
 }());
@@ -546,14 +684,14 @@ var XhrInterceptor = /** @class */ (function () {
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template [ngIf]=\"auth.isAuthenticated()\">\r\n<div class=\"transparent col-lg-12\">\r\n  <nav class=\"col-lg-8 offset-lg-2\">\r\n\r\n    <ul>\r\n      <li>\r\n        <a routerLink=\"/home\">Home</a>\r\n      </li>\r\n      <li>\r\n        <a routerLink=\"/hotels\">Hotels</a>\r\n      </li>\r\n      <li>\r\n        <a (click)=\"logout()\">Logout</a>\r\n      </li>\r\n    </ul>\r\n  </nav>\r\n</div>\r\n</ng-template>\r\n"
+module.exports = "<div class=\"transparent col-lg-12\">\r\n  <nav class=\"col-lg-8 offset-lg-2\">\r\n\r\n    <ul>\r\n      <li>\r\n        <a routerLink=\"/home\">Home</a>\r\n      </li>\r\n      <li>\r\n        <a routerLink=\"/hotels\">Hotels</a>\r\n      </li>\r\n      <li>\r\n        <img [src]=\"(userProfileImgUrl | async)\" class=\"img-thumbnail\" alt=\"profile picture\">\r\n\r\n      </li>\r\n      <li>\r\n        <a (click)=\"logout()\">Logout</a>\r\n      </li>      \r\n    </ul>\r\n  </nav>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/navbar/navbar.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".transparent {\n  position: fixed;\n  top: 0;\n  z-index: 12;\n  height: 6rem;\n  background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 0)), to(rgba(0, 0, 0, 0.4)));\n  background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4)); }\n  .transparent li {\n    color: #fff;\n    font-size: 1.5rem;\n    list-style: none;\n    display: inline;\n    text-transform: uppercase;\n    font-weight: 600; }\n  .transparent li:not(:first-child) {\n      margin-left: 2rem; }\n  .transparent li a {\n      display: inline-block;\n      text-align: center;\n      text-decoration: none;\n      padding-top: .8rem;\n      color: white; }\n  .transparent li:last-child {\n      cursor: pointer;\n      float: right; }\n"
+module.exports = ".transparent {\n  position: fixed;\n  top: 0;\n  padding-top: .6rem;\n  z-index: 12;\n  height: 6rem;\n  background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 0)), to(rgba(0, 0, 0, 0.4)));\n  background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4)); }\n  .transparent li {\n    color: #fff;\n    font-size: 1.5rem;\n    list-style: none;\n    display: inline;\n    text-transform: uppercase;\n    font-weight: 600; }\n  .transparent li:not(:first-child) {\n      margin-left: 2rem; }\n  .transparent li a {\n      display: inline-block;\n      text-align: center;\n      text-decoration: none;\n      padding-top: .8rem;\n      color: white; }\n  .transparent li:last-child {\n      cursor: pointer;\n      float: right; }\n  .img-thumbnail {\n  margin-left: 2rem;\n  height: 4rem;\n  width: 4rem;\n  float: right;\n  border-radius: 20rem;\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  overflow: hidden; }\n"
 
 /***/ }),
 
@@ -564,8 +702,7 @@ module.exports = ".transparent {\n  position: fixed;\n  top: 0;\n  z-index: 12;\
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavbarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_service__ = __webpack_require__("./src/app/shared/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_user_service__ = __webpack_require__("./src/app/shared/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -578,12 +715,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(auth, http, router) {
+    function NavbarComponent(auth, userService) {
         this.auth = auth;
-        this.http = http;
-        this.router = router;
+        this.userService = userService;
+        this.userProfileImgUrl = userService.getUserProfileImageUrlObservable();
     }
     NavbarComponent.prototype.ngOnInit = function () {
     };
@@ -596,7 +732,7 @@ var NavbarComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/navbar/navbar.component.html"),
             styles: [__webpack_require__("./src/app/navbar/navbar.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_2__shared_user_service__["a" /* UserService */]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
@@ -638,8 +774,8 @@ var AuthGuard = /** @class */ (function () {
         return true;
     };
     AuthGuard = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* Router */]])
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* Router */]])
     ], AuthGuard);
     return AuthGuard;
 }());
@@ -657,6 +793,7 @@ var AuthGuard = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngx_cookie_service__ = __webpack_require__("./node_modules/ngx-cookie-service/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_service__ = __webpack_require__("./src/app/shared/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -670,13 +807,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AuthService = /** @class */ (function () {
-    function AuthService(http, authCookie, router) {
+    function AuthService(http, authCookie, router, userService) {
         this.http = http;
         this.authCookie = authCookie;
         this.router = router;
+        this.userService = userService;
     }
-    AuthService.prototype.authenticate = function (credentials, callback) {
+    AuthService.prototype.authenticate = function (credentials, callback, callback2) {
         var _this = this;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["d" /* HttpHeaders */](credentials ? {
             authorization: 'Basic ' + btoa(credentials.username + ':' + credentials.password)
@@ -684,9 +823,13 @@ var AuthService = /** @class */ (function () {
         this.http.get('api/auth', { headers: headers }).subscribe(function (response) {
             console.log(response);
             if (response['name']) {
-                _this.authCookie.set('authenticated', 'true');
+                _this.authCookie.set('authenticated', 'true', .2);
+                _this.userService.getUser(response['name']);
             }
             return callback && callback();
+        }, function (error) {
+            _this.error = error;
+            return callback2 && callback2();
         });
     };
     AuthService.prototype.isAuthenticated = function () {
@@ -700,10 +843,68 @@ var AuthService = /** @class */ (function () {
         }).subscribe();
     };
     AuthService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_2_ngx_cookie_service__["a" /* CookieService */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_4__user_service__["a" /* UserService */]])
     ], AuthService);
     return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/user.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__("./node_modules/rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var UserService = /** @class */ (function () {
+    function UserService(http) {
+        this.http = http;
+        this.imgUrl = '../../assets/images/profile.png';
+        this.imgUrlSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs__["BehaviorSubject"](this.imgUrl);
+    }
+    UserService.prototype.getUserProfileImageUrlObservable = function () {
+        return this.imgUrlSubject.asObservable();
+    };
+    UserService.prototype.getUser = function (username) {
+        var _this = this;
+        return this.http.get('/api/users/user/' + username).subscribe(function (result) {
+            _this.imgUrlSubject.next(result.user.profileImgUrl);
+            console.log(result.user.profileImgUrl);
+            _this.user = result.user;
+            return result.user;
+        }, function (error) {
+            console.log(error);
+        });
+        // .map((result: any) => {
+        //     return result.user;
+        // }).subscribe();
+    };
+    UserService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClient */]])
+    ], UserService);
+    return UserService;
 }());
 
 
@@ -736,7 +937,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* enableProdMode */])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
