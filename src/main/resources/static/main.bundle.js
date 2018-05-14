@@ -98,12 +98,16 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__shared_auth_guard_service__ = __webpack_require__("./src/app/shared/auth-guard.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__shared_user_service__ = __webpack_require__("./src/app/shared/user.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__hotel_room_list_room_list_component__ = __webpack_require__("./src/app/hotel/room-list/room-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__profile_profile_component__ = __webpack_require__("./src/app/profile/profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__shared_reservation_service__ = __webpack_require__("./src/app/shared/reservation.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -133,7 +137,8 @@ var appRoutes = [
     { path: 'hotels', component: __WEBPACK_IMPORTED_MODULE_8__hotel_hotel_component__["a" /* HotelComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_18__shared_auth_guard_service__["a" /* AuthGuard */]], children: [
             { path: ':id/detail', component: __WEBPACK_IMPORTED_MODULE_9__hotel_hotel_details_hotel_details_component__["a" /* HotelDetailsComponent */] },
             { path: ':id/rooms', component: __WEBPACK_IMPORTED_MODULE_20__hotel_room_list_room_list_component__["a" /* RoomListComponent */] }
-        ] }
+        ] },
+    { path: 'profile', component: __WEBPACK_IMPORTED_MODULE_21__profile_profile_component__["a" /* ProfileComponent */] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -148,6 +153,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_16__home_home_login_home_login_component__["a" /* HomeLoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_17__navbar_navbar_component__["a" /* NavbarComponent */],
                 __WEBPACK_IMPORTED_MODULE_20__hotel_room_list_room_list_component__["a" /* RoomListComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__profile_profile_component__["a" /* ProfileComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -164,7 +170,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_12_ngx_cookie_service__["a" /* CookieService */],
                 __WEBPACK_IMPORTED_MODULE_14__shared_auth_service__["a" /* AuthService */],
                 { provide: __WEBPACK_IMPORTED_MODULE_10__angular_common_http__["a" /* HTTP_INTERCEPTORS */], useClass: __WEBPACK_IMPORTED_MODULE_15__interceptor__["a" /* XhrInterceptor */], multi: true },
-                __WEBPACK_IMPORTED_MODULE_19__shared_user_service__["a" /* UserService */]
+                __WEBPACK_IMPORTED_MODULE_19__shared_user_service__["a" /* UserService */],
+                __WEBPACK_IMPORTED_MODULE_22__shared_reservation_service__["a" /* ReservationService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
@@ -607,7 +614,7 @@ var HotelService = /** @class */ (function () {
 /***/ "./src/app/hotel/room-list/room-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"popup\">\n  <div class=\"popup__content\">\n    <ul>\n      <div style=\"color: white;\" *ngFor=\"let room of rooms\">\n        <div>\n          Room Number: {{room.roomNumber}} Type: {{room.type}} Price: {{room.price}} Available: {{room.available}}\n          <input type=\"checkbox\" id=\"roomCheckbox\" (change)=\"addToCart($event, room)\">\n\n\n        </div>\n      </div>\n    </ul>\n    <div>\n      <button (click) = \"makeReservation(content)\">Reserve</button>\n    </div>\n  </div>\n</div>\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title\">Modal title</h4>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <p>One fine body&hellip;</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Confirm</button>\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Cancel</button>\n  </div>\n</ng-template>"
+module.exports = "<div class=\"popup\">\n  <div class=\"popup__content\">\n    <ul>\n      <div style=\"color: white;\" *ngFor=\"let room of rooms\">\n        <div>\n          Room Number: {{room.roomNumber}} Type: {{room.type}} Price: {{room.price}} Available: {{room.available}}\n          <input type=\"checkbox\" id=\"roomCheckbox\" (change)=\"addToCart($event, room)\">\n\n\n        </div>\n      </div>\n    </ul>\n    <div>\n      <button (click) = \"makeReservation(content)\">Reserve</button>\n    </div>\n  </div>\n</div>\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title\">Modal title</h4>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <p>One fine body&hellip;</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Confirm</button>\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"d()\">Cancel</button>\n  </div>\n</ng-template>\n<ng-template #confirmation let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title\">Confirmation</h4>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"c()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <p>Your Reservation has been confirmed</p>\n  </div>\n  <div class=\"modal-footer\">\n     <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Dismiss</button>\n  </div>\n</ng-template>"
 
 /***/ }),
 
@@ -659,6 +666,9 @@ var RoomListComponent = /** @class */ (function () {
     }
     RoomListComponent.prototype.ngOnInit = function () {
         console.log(this.cart);
+        this.getUser();
+        console.log("getting user");
+        this.user = this.userService.loggedInUser;
     };
     RoomListComponent.prototype.addToCart = function (event, room) {
         if (event.target.checked) {
@@ -672,22 +682,30 @@ var RoomListComponent = /** @class */ (function () {
             }
         }
     };
+    RoomListComponent.prototype.getUser = function () {
+        var _this = this;
+        this.http.get('api/auth').subscribe(function (response) {
+            if (response['name']) {
+                _this.userService.getUserByUsername(response['name']);
+            }
+        }, function (error) { return console.log(error); });
+    };
     RoomListComponent.prototype.makeReservation = function (content) {
         var _this = this;
         console.log("making reservation");
-        //collected when first logged in
-        var user = this.userService.loggedInUser;
         //collected when selected in hotel-details component
         var hotel = this.hotelService.selectedHotel;
         //collected when selecting date in hotel-details component
         var checkIn = this.hotelService.selectedCheckinDate;
         var checkOut = this.hotelService.selectedCheckoutDate;
-        var reservation = new __WEBPACK_IMPORTED_MODULE_3__shared_reservation_model__["a" /* Reservation */](checkIn, checkOut, false, user, hotel, this.cart);
-        this.modalService.open(content).result.then(function () {
-            console.log("making post request to reservations for user " + user);
+        var reservation = new __WEBPACK_IMPORTED_MODULE_3__shared_reservation_model__["a" /* Reservation */](checkIn, checkOut, false, this.user, hotel, this.cart);
+        this.modalService.open(content, { centered: true }).result.then(function () {
+            console.log("making post request to reservations for user " + _this.user);
             _this.http.post('/api/reservations', reservation).subscribe(function (response) {
                 console.log(response);
-                _this.router.navigate(['hotels']);
+                _this.modalService.open(_this.confirmation, { centered: true }).result.then(function () {
+                    _this.router.navigate(['hotels']);
+                }, function () { return console.log("ok"); });
             }, function (error) {
                 console.log(error);
             });
@@ -695,6 +713,10 @@ var RoomListComponent = /** @class */ (function () {
             console.log("Cancelled the reservation");
         });
     };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* ViewChild */])('confirmation'),
+        __metadata("design:type", Object)
+    ], RoomListComponent.prototype, "confirmation", void 0);
     RoomListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-room-list',
@@ -749,7 +771,7 @@ var XhrInterceptor = /** @class */ (function () {
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transparent col-lg-12\">\r\n  <nav class=\"col-lg-8 offset-lg-2\">\r\n\r\n    <ul>\r\n      <li>\r\n        <a routerLink=\"/home\">Home</a>\r\n      </li>\r\n      <li>\r\n        <a routerLink=\"/hotels\">Hotels</a>\r\n      </li>\r\n      <li>\r\n        <img [src]=\"(userProfileImgUrl | async)\" class=\"img-thumbnail\" alt=\"profile picture\">\r\n\r\n      </li>\r\n      <li>\r\n        <a (click)=\"logout()\">Logout</a>\r\n      </li>      \r\n    </ul>\r\n  </nav>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<div class=\"transparent col-lg-12\">\r\n  <nav class=\"col-lg-8 offset-lg-2\">\r\n\r\n    <ul>\r\n      \r\n      <li>\r\n        <a routerLink=\"/hotels\">Hotels</a>\r\n      </li>\r\n      <li>\r\n        <a routerLink=\"/profile\">Profile</a>\r\n      </li>\r\n      <li>\r\n        <img [src]=\"(userProfileImgUrl | async)\" class=\"img-thumbnail\" alt=\"profile picture\">\r\n\r\n      </li>\r\n      <li>\r\n        <a (click)=\"logout()\">Logout</a>\r\n      </li>      \r\n    </ul>\r\n  </nav>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -800,6 +822,85 @@ var NavbarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_2__shared_user_service__["a" /* UserService */]])
     ], NavbarComponent);
     return NavbarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/profile/profile.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"res col-lg-8 offset-lg-2\">\n  <ul>\n    <div *ngFor=\"let res of reservations\">{{res.id}} \n      Checkin: {{res.checkIn * 1000 | date:'shortDate'}} \n      Checkout: {{res.checkOut * 1000 | date:'shortDate'}}</div>\n\n  </ul>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/profile/profile.component.scss":
+/***/ (function(module, exports) {
+
+module.exports = ".res {\n  margin-top: 5rem;\n  text-align: center; }\n"
+
+/***/ }),
+
+/***/ "./src/app/profile/profile.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_user_service__ = __webpack_require__("./src/app/shared/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reservation_service__ = __webpack_require__("./src/app/shared/reservation.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ProfileComponent = /** @class */ (function () {
+    function ProfileComponent(userService, reservationService, http) {
+        this.userService = userService;
+        this.reservationService = reservationService;
+        this.http = http;
+        this.reservations = [];
+    }
+    ProfileComponent.prototype.ngOnInit = function () {
+        this.initializeUser();
+    };
+    ProfileComponent.prototype.initializeUser = function () {
+        var _this = this;
+        this.http.get('api/auth').subscribe(function (response) {
+            if (response['name']) {
+                _this.userService.getUserByUsername(response['name']);
+                _this.user = _this.userService.loggedInUser;
+                _this.fetchReservtions();
+            }
+        }, function (error) { return console.log(error); });
+    };
+    ProfileComponent.prototype.fetchReservtions = function () {
+        var _this = this;
+        this.reservationService.getReservationForUserId(this.user.id).subscribe(function (reservations) {
+            _this.reservations = reservations;
+        }, function (error) { return console.log(error); });
+    };
+    ProfileComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-profile',
+            template: __webpack_require__("./src/app/profile/profile.component.html"),
+            styles: [__webpack_require__("./src/app/profile/profile.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_2__shared_reservation_service__["a" /* ReservationService */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClient */]])
+    ], ProfileComponent);
+    return ProfileComponent;
 }());
 
 
@@ -889,7 +990,7 @@ var AuthService = /** @class */ (function () {
             console.log(response);
             if (response['name']) {
                 _this.authCookie.set('authenticated', 'true', .2);
-                _this.userService.getUser(response['name']);
+                _this.userService.getUserByUsername(response['name']);
             }
             return callback && callback();
         }, function (error) {
@@ -942,6 +1043,44 @@ var Reservation = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/reservation.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReservationService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ReservationService = /** @class */ (function () {
+    function ReservationService(http) {
+        this.http = http;
+    }
+    ReservationService.prototype.getReservationForUserId = function (userId) {
+        return this.http.get('api/users/' + userId + '/reservations').map(function (result) {
+            return result.content.map(function (content) { return content.reservation; });
+        });
+    };
+    ReservationService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
+    ], ReservationService);
+    return ReservationService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/user.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -951,6 +1090,7 @@ var Reservation = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__("./node_modules/rxjs/Rx.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__ = __webpack_require__("./node_modules/ngx-cookie-service/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -963,16 +1103,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var UserService = /** @class */ (function () {
-    function UserService(http) {
+    function UserService(http, cookieService) {
         this.http = http;
+        this.cookieService = cookieService;
         this.imgUrl = '../../assets/images/profile.png';
         this.imgUrlSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs__["BehaviorSubject"](this.imgUrl);
     }
     UserService.prototype.getUserProfileImageUrlObservable = function () {
         return this.imgUrlSubject.asObservable();
     };
-    UserService.prototype.getUser = function (username) {
+    UserService.prototype.getUserByUsername = function (username) {
         var _this = this;
         return this.http.get('/api/users/user/' + username).subscribe(function (result) {
             _this.imgUrlSubject.next(result.user.profileImgUrl);
@@ -982,13 +1124,10 @@ var UserService = /** @class */ (function () {
         }, function (error) {
             console.log(error);
         });
-        // .map((result: any) => {
-        //     return result.user;
-        // }).subscribe();
     };
     UserService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */]])
     ], UserService);
     return UserService;
 }());
