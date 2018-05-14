@@ -1,7 +1,9 @@
 package com.avempra.hotelreservation.service;
 import com.avempra.hotelreservation.entities.Hotel;
+import com.avempra.hotelreservation.entities.Reservation;
 import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.resources.HotelResource;
+import com.avempra.hotelreservation.resources.ReservationResource;
 import com.avempra.hotelreservation.resources.RoomResource;
 import org.springframework.hateoas.Resources;
 
@@ -20,4 +22,6 @@ public interface HotelService {
     HotelResource updateHotel(Long hotelId, Hotel hotel);
 
     void deleteHotelById(Long hotelId);
+
+    Resources<ReservationResource> findReservationsForRoom(Long hotelId, Long roomId);
 }

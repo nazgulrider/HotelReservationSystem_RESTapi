@@ -9,6 +9,7 @@ import com.avempra.hotelreservation.resources.RoomResource;
 import com.avempra.hotelreservation.service.HotelService;
 import com.avempra.hotelreservation.service.ReservationService;
 import com.avempra.hotelreservation.service.RoomService;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -38,12 +39,10 @@ public class HotelController {
 
     private HotelService hotelService;
     private ReservationService reservationService;
-    private RoomService roomService;
 
-    public HotelController(HotelService hotelService, ReservationService reservationService, RoomService roomService) {
+    public HotelController(HotelService hotelService, ReservationService reservationService) {
         this.hotelService = hotelService;
         this.reservationService = reservationService;
-        this.roomService = roomService;
     }
 
     /**
@@ -115,8 +114,16 @@ public class HotelController {
      */
     @GetMapping("/{hotelId}/rooms")
     public ResponseEntity<Resources<RoomResource>> getRoomsForHotelId(@PathVariable Long hotelId){
+
         return new ResponseEntity<>(
                 hotelService.findRoomsByHotelId(hotelId),HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/{hotelId}/rooms/{roomId}/reservations")
+    public ResponseEntity<Resources<ReservationResource>> getReservationsForRoom(@PathVariable Long hotelId, @PathVariable Long roomId){
+        return new ResponseEntity<>(
+                hotelService.findReservationsForRoom(hotelId, roomId), HttpStatus.OK
         );
     }
 

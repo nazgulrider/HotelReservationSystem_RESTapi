@@ -132,7 +132,7 @@ var appRoutes = [
         ] },
     { path: 'hotels', component: __WEBPACK_IMPORTED_MODULE_8__hotel_hotel_component__["a" /* HotelComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_18__shared_auth_guard_service__["a" /* AuthGuard */]], children: [
             { path: ':id/detail', component: __WEBPACK_IMPORTED_MODULE_9__hotel_hotel_details_hotel_details_component__["a" /* HotelDetailsComponent */] },
-            { path: 'rooms', component: __WEBPACK_IMPORTED_MODULE_20__hotel_room_list_room_list_component__["a" /* RoomListComponent */] }
+            { path: ':id/rooms', component: __WEBPACK_IMPORTED_MODULE_20__hotel_room_list_room_list_component__["a" /* RoomListComponent */] }
         ] }
 ];
 var AppModule = /** @class */ (function () {
@@ -155,7 +155,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_10__angular_common_http__["c" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_13__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__["b" /* NgbModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_5_mydaterangepicker__["MyDateRangePickerModule"]
             ],
             providers: [
@@ -362,17 +362,35 @@ var HotelDetailsComponent = /** @class */ (function () {
         var id = this.route.snapshot.params['id'];
         this.hotelService.getRooms(id).subscribe(function (rooms) {
             _this.hotelService.rooms = rooms;
-            console.log("rooms" + rooms);
+            console.log("In hotel-details component initialization step getting rooms");
+            console.log(rooms);
         }, function (error) { return console.log(error); });
     };
     HotelDetailsComponent.prototype.onDateRangeChanged = function (event) {
         console.log('jsdate: ' + event.beginEpoc + " - " + event.endJsDate);
-        this.start = event.beginEpoc;
-        this.end = event.endEpoc;
-        this.hotelService.filteredRooms = this.hotelService.rooms.filter(function (room) {
-            return room.reservation === null || !(room.reservation.checkIn >= event.beginEpoc && room.reservation.checkIn <= event.endEpoc);
+        this.hotelService.selectedCheckinDate = event.beginEpoc;
+        this.hotelService.selectedCheckoutDate = event.endEpoc;
+        this.hotelService.filteredRooms = this.hotelService.rooms.filter(function (room) { return room.reservations.length === 0; }
+        //  || room.reservations.filter(reservation=>{
+        //     !(reservation.checkIn >= event.beginEpoc && reservation.checkIn <= event.endEpoc)
+        //       && !(reservation.checkIn >= event.beginEpoc && reservation.checkIn <= event.endEpoc)
+        // })
+        );
+        // this.hotelService.filteredRooms = this.hotelService.rooms.filter(room =>
+        //   room.reservation === null || !(event.beginEpoc >= room.reservation.checkIn && event.beginEpoc <= room.reservation.checkOut)
+        //    && !(room.reservation.checkIn >= event.beginEpoc && room.reservation.checkIn <= event.endEpoc)         
+        //  )
+        console.log(this.hotelService.filteredRooms);
+    };
+    HotelDetailsComponent.prototype.filter = function (room, event) {
+        var answer = room.reservations.map(function (reservation) {
+            if (!(event.beginEpoc >= reservation.checkIn && event.beginEpoc <= reservation.checkOut)
+                && !(reservation.checkIn >= event.beginEpoc && reservation.checkIn <= event.endEpoc)) {
+                return false;
+            }
+            return true;
         });
-        console.log(this.filteredRooms);
+        console.log(answer);
     };
     HotelDetailsComponent.prototype.onCloseHandled = function () {
         this.router.navigate(['hotels']);
@@ -396,16 +414,7 @@ var HotelDetailsComponent = /** @class */ (function () {
         }
     };
     HotelDetailsComponent.prototype.findAvailableRooms = function (id) {
-        this.router.navigate(['hotels/rooms']);
-        console.log('Value: ', this.model);
-        console.log(this.hotelService.rooms.length);
-        if (this.hotelService.rooms.length !== 0) {
-            this.hotelService.rooms.forEach(function (room) {
-                if (room.reservation === null) {
-                    console.log(room);
-                }
-            });
-        }
+        this.router.navigate(['hotels/' + id + '/rooms']);
     };
     //cancel the click event from propagating to the parent div which triggers close event on the window
     HotelDetailsComponent.prototype.onCardClicked = function (e) {
@@ -497,7 +506,7 @@ var HotelComponent = /** @class */ (function () {
         }
     };
     HotelComponent.prototype.select = function (hotel) {
-        this.selectedHotel = hotel;
+        this.hotelService.selectedHotel = hotel;
         this.route.navigate(['hotels/' + hotel.id + '/detail']);
     };
     HotelComponent.prototype.onClose = function () {
@@ -598,7 +607,7 @@ var HotelService = /** @class */ (function () {
 /***/ "./src/app/hotel/room-list/room-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"popup\">\n  <div class=\"popup__content\">\n    <ul>\n      <div style=\"color: white;\" *ngFor=\"let room of rooms\">\n        {{room.roomNumber}} + {{room.type}}\n      </div>\n    </ul>\n  </div>\n</div>\n"
+module.exports = "<div class=\"popup\">\n  <div class=\"popup__content\">\n    <ul>\n      <div style=\"color: white;\" *ngFor=\"let room of rooms\">\n        <div>\n          Room Number: {{room.roomNumber}} Type: {{room.type}} Price: {{room.price}} Available: {{room.available}}\n          <input type=\"checkbox\" id=\"roomCheckbox\" (change)=\"addToCart($event, room)\">\n\n\n        </div>\n      </div>\n    </ul>\n    <div>\n      <button (click) = \"makeReservation(content)\">Reserve</button>\n    </div>\n  </div>\n</div>\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title\">Modal title</h4>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <p>One fine body&hellip;</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Confirm</button>\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Cancel</button>\n  </div>\n</ng-template>"
 
 /***/ }),
 
@@ -616,6 +625,11 @@ module.exports = ""
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoomListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hotel_service__ = __webpack_require__("./src/app/hotel/hotel.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_user_service__ = __webpack_require__("./src/app/shared/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reservation_model__ = __webpack_require__("./src/app/shared/reservation.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__ = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -627,12 +641,59 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
+
+
 var RoomListComponent = /** @class */ (function () {
-    function RoomListComponent(hotelService) {
+    function RoomListComponent(hotelService, router, http, userService, modalService) {
         this.hotelService = hotelService;
+        this.router = router;
+        this.http = http;
+        this.userService = userService;
+        this.modalService = modalService;
+        this.rooms = [];
+        this.cart = [];
         this.rooms = hotelService.filteredRooms;
     }
     RoomListComponent.prototype.ngOnInit = function () {
+        console.log(this.cart);
+    };
+    RoomListComponent.prototype.addToCart = function (event, room) {
+        if (event.target.checked) {
+            this.cart.push(room);
+            console.log(this.cart);
+        }
+        else if (!event.target.checked) {
+            if (this.cart.includes(room)) {
+                this.cart = this.cart.filter(function (content) { return content !== room; });
+                console.log(this.cart);
+            }
+        }
+    };
+    RoomListComponent.prototype.makeReservation = function (content) {
+        var _this = this;
+        console.log("making reservation");
+        //collected when first logged in
+        var user = this.userService.loggedInUser;
+        //collected when selected in hotel-details component
+        var hotel = this.hotelService.selectedHotel;
+        //collected when selecting date in hotel-details component
+        var checkIn = this.hotelService.selectedCheckinDate;
+        var checkOut = this.hotelService.selectedCheckoutDate;
+        var reservation = new __WEBPACK_IMPORTED_MODULE_3__shared_reservation_model__["a" /* Reservation */](checkIn, checkOut, false, user, hotel, this.cart);
+        this.modalService.open(content).result.then(function () {
+            console.log("making post request to reservations for user " + user);
+            _this.http.post('/api/reservations', reservation).subscribe(function (response) {
+                console.log(response);
+                _this.router.navigate(['hotels']);
+            }, function (error) {
+                console.log(error);
+            });
+        }, function () {
+            console.log("Cancelled the reservation");
+        });
     };
     RoomListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -640,7 +701,11 @@ var RoomListComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/hotel/room-list/room-list.component.html"),
             styles: [__webpack_require__("./src/app/hotel/room-list/room-list.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__hotel_service__["a" /* HotelService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__hotel_service__["a" /* HotelService */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["b" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_2__shared_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_4__ng_bootstrap_ng_bootstrap__["a" /* NgbModal */]])
     ], RoomListComponent);
     return RoomListComponent;
 }());
@@ -856,6 +921,27 @@ var AuthService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/reservation.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Reservation; });
+var Reservation = /** @class */ (function () {
+    function Reservation(checkIn, checkOut, paid, user, hotel, rooms) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.paid = paid;
+        this.user = user;
+        this.hotel = hotel;
+        this.rooms = rooms;
+    }
+    return Reservation;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/user.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -891,7 +977,7 @@ var UserService = /** @class */ (function () {
         return this.http.get('/api/users/user/' + username).subscribe(function (result) {
             _this.imgUrlSubject.next(result.user.profileImgUrl);
             console.log(result.user.profileImgUrl);
-            _this.user = result.user;
+            _this.loggedInUser = result.user;
             return result.user;
         }, function (error) {
             console.log(error);

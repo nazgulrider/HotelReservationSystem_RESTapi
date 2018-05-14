@@ -1,17 +1,21 @@
 package com.avempra.hotelreservation.service;
 
 import com.avempra.hotelreservation.entities.Hotel;
+import com.avempra.hotelreservation.entities.Reservation;
 import com.avempra.hotelreservation.entities.Room;
 import com.avempra.hotelreservation.exceptions.DataNotFoundException;
 import com.avempra.hotelreservation.repositories.HotelRepository;
+import com.avempra.hotelreservation.repositories.ReservationRepository;
 import com.avempra.hotelreservation.repositories.RoomRepository;
 import com.avempra.hotelreservation.resources.HotelResource;
+import com.avempra.hotelreservation.resources.ReservationResource;
 import com.avempra.hotelreservation.resources.RoomResource;
 import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -55,6 +59,14 @@ public class HotelServiceImpl implements HotelService {
         return new Resources<>(rooms.stream().map(RoomResource::new).collect(Collectors.toList()));
     }
 
+    @Override
+    public Resources<ReservationResource> findReservationsForRoom(Long hotelId, Long roomId) {
+        Collection<Room> room = roomRepository.findRoomsByHotel_Id(hotelId)
+                .stream().filter(room1 -> room1.getId()==roomId).collect(Collectors.toList());
+        return new Resources<>(((List<Room>) room).get(0).getReservations()
+                .stream().map(ReservationResource::new).collect(Collectors.toList()));
+    }
+
 //    @Override
 //    public HotelResource saveRoomToHotel(Long hotelId, Room room) {
 //        Hotel savedHotel = hotelRepository.findById(hotelId).map(hotel -> {
@@ -80,6 +92,8 @@ public class HotelServiceImpl implements HotelService {
         hotelRepository.findById(hotelId)
                 .ifPresent(hotel -> hotelRepository.delete(hotel));
     }
+
+
 
 
 }

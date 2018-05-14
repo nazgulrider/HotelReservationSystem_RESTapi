@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -78,8 +79,7 @@ public class ReservationServiceImpl implements ReservationService {
 
             //add reservation to all rooms and save rooms to db (explicitly saving rooms to save changes made to the room)
             List<Room> roomsList = rooms.stream().map(room -> {
-                room.setReservation(savedReservation);
-                room.setAvailable(false);
+                room.getReservations().add(savedReservation);
                 room.setHotel(hotel);
                 return room;
             }).collect(Collectors.toList());
@@ -115,14 +115,14 @@ public class ReservationServiceImpl implements ReservationService {
     public void deleteReservationById(Long reservationId) {
         if(reservationRepository.existsById(reservationId)){
             //get reservation-getRooms
-            Collection<Room> rooms = reservationRepository.findById(reservationId)
+            Optional<Reservation> reservation = reservationRepository.findById(reservationId);
+            Collection<Room> rooms = reservation
                                     .map(Reservation::getRooms)
                                     .orElseThrow(DataNotFoundException::new);
 
             //set reservation to null
             List<Room> noResRooms = rooms.stream().map(room -> {
-                                            room.setReservation(null);
-                                            room.setAvailable(true);
+                                            room.getReservations().remove(reservation.get());
                                             return room;
                                         }).collect(Collectors.toList());
 

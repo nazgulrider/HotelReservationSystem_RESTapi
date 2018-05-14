@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -20,21 +21,25 @@ public class Room {
     @Enumerated(EnumType.ORDINAL)
     private RoomType type;
     private Float price;
-    private boolean available;
 
-    @ManyToOne
-    private Reservation reservation;
+    @JsonProperty(access = JsonProperty.Access.AUTO)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Room_Reservation",
+            joinColumns = {@JoinColumn(name = "room_id")},
+            inverseJoinColumns = {@JoinColumn(name = "reservation_id")}
+    )
+    private Collection<Reservation> reservations;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Hotel hotel;
 
 
-    public Room(int roomNumber, RoomType type, Float price, boolean available, Hotel hotel) {
+    public Room(int roomNumber, RoomType type, Float price, Hotel hotel) {
         this.roomNumber = roomNumber;
         this.type = type;
         this.price = price;
-        this.available = available;
         this.hotel = hotel;
     }
 }

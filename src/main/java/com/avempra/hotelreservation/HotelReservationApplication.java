@@ -55,7 +55,7 @@ public class HotelReservationApplication {
 				hotels.add(hotel);
 
 				while (count1<11){
-					rooms.add(new Room(roomNumber,RoomType.ROYAL,49.99f,true, hotel));
+					rooms.add(new Room(roomNumber,RoomType.ROYAL,49.99f, hotel));
 					roomNumber++;
 					count1++;
 				}

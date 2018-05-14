@@ -12,6 +12,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Reservation.class)
 public class Reservation {
     @Id
@@ -32,7 +33,7 @@ public class Reservation {
 
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.MERGE)
+    @ManyToMany(mappedBy = "reservations", cascade = CascadeType.REFRESH)
     private Collection<Room> rooms;
 
 }

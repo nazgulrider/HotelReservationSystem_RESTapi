@@ -18,7 +18,10 @@ public class RoomResource extends ResourceSupport {
 
     public RoomResource(Room room) {
         this.room = room;
-        final long id = room.getId();
+        final long roomId = room.getId();
+        final long hotelId = room.getHotel().getId();
+
+        add(linkTo(methodOn(HotelController.class).getReservationsForRoom(hotelId,roomId)).withRel("reservations"));
 
 
     }
