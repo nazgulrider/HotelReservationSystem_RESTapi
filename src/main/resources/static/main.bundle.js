@@ -55,7 +55,7 @@ var AppComponent = /** @class */ (function () {
     function AppComponent(auth, userService) {
         this.auth = auth;
         this.userService = userService;
-        this.title = 'app';
+        this.title = 'perfect';
     }
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -63,7 +63,8 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_2__shared_user_service__["a" /* UserService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_2__shared_user_service__["a" /* UserService */]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -313,7 +314,7 @@ var HomeComponent = /** @class */ (function () {
 /***/ "./src/app/hotel/hotel-details/hotel-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"popup\" (click)=\"onCloseHandled()\">\r\n\r\n  <div class=\"popup__content col-lg-12\">\r\n    <div class=\"card col-lg-3 offset-lg-1\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/room-1.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker1\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Royal</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>King size bed</li>\r\n            <hr>\r\n            <li>24 hour room service</li>\r\n            <hr>\r\n            <li>Royal perks</li>\r\n            <hr>\r\n            <li>In-room swimming pool</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker1\">\r\n        <!-- <label for=\"start\">Start</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"start\" id=\"start\" ngbDatepicker #s=\"ngbDatepicker\" (click)=\"s.toggle()\">\r\n        <hr>\r\n        <label for=\"end\">End</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"end\" id=\"end\" ngbDatepicker #e=\"ngbDatepicker\" (click)=\"e.toggle()\"> -->\r\n        <form #f=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" (dateRangeChanged)=\"onDateRangeChanged($event)\" [options]=\"myDateRangePickerOptions\" [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n\r\n      </div>\r\n      <div class=\"card__button\">\r\n        <button (click)=\"onCheckAvailable(1)\" class=\"btn\" [hidden]=\"showDatePicker1\">Book Now</button>\r\n        <button (click)=\"findAvailableRooms(1)\" class=\"btn\" [hidden]=\"!showDatePicker1\" [disabled] =\"!f.valid\">Check Availability</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- ------------------------------------------------------------------------------------------------------------------------ -->\r\n\r\n    <div class=\"card col-lg-3\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/royal1.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker2\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Presidential</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>Queen size bed</li>\r\n            <hr>\r\n            <li>24 hour room service</li>\r\n            <hr>\r\n            <li>Presidential perks</li>\r\n            <hr>\r\n            <li>In-room jacuzzi</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker2\">\r\n        <!-- <label for=\"start\">Start</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"start2\" id=\"start2\" ngbDatepicker #s2=\"ngbDatepicker\" (click)=\"s2.toggle()\">\r\n        <hr>\r\n        <label for=\"end\">End</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"end2\" id=\"end2\" ngbDatepicker #e2=\"ngbDatepicker\" (click)=\"e2.toggle()\"> -->\r\n        <form #myForm=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" [options]=\"myDateRangePickerOptions\" [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n      </div>\r\n      <div class=\"card__button\">\r\n        <a (click)=\"onCheckAvailable(2)\" class=\"btn\" [hidden]=\"showDatePicker2\">Book Now</a>\r\n        <a (click)=\"findAvailableRooms(2)\" class=\"btn\" [hidden]=\"!showDatePicker2\">Check Availability</a>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- -------------------------------------------------------------------------------------------------------------------------- -->\r\n\r\n    <div class=\"card col-lg-3\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/room-3.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker3\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Deluxe</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>Twin size bed</li>\r\n            <hr>\r\n            <li>Complimentary breakfast</li>\r\n            <hr>\r\n            <li>Deluxe perks</li>\r\n            <hr>\r\n            <li>In-room bathtub</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker3\">\r\n        <!-- <label for=\"start\">Start</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"start3\" id=\"start3\" ngbDatepicker #s3=\"ngbDatepicker\" (click)=\"s3.toggle()\">\r\n        <hr>\r\n        <label for=\"end\">End</label>\r\n        <input type=\"text\" placeholder=\"yyyy-mm-dd\" name=\"end3\" id=\"end3\" ngbDatepicker #e3=\"ngbDatepicker\" (click)=\"e3.toggle()\"> -->\r\n\r\n        <form #myForm=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" [options]=\"myDateRangePickerOptions\" [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n\r\n      </div>\r\n      <div class=\"card__button\">\r\n        <a (click)=\"onCheckAvailable(3)\" class=\"btn\" [hidden]=\"showDatePicker3\">Book Now</a>\r\n        <a (click)=\"findAvailableRooms(3)\" class=\"btn\" [hidden]=\"!showDatePicker3\">Check Availability</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"popup\" (click)=\"onCloseHandled()\">\r\n\r\n  <div class=\"popup__content col-lg-12\">\r\n    <div class=\"card col-lg-3 offset-lg-1\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/room-1.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker1\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Royal</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>King size bed</li>\r\n            <hr>\r\n            <li>24 hour room service</li>\r\n            <hr>\r\n            <li>Royal perks</li>\r\n            <hr>\r\n            <li>In-room swimming pool</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker1\">\r\n        <form #f=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" (dateRangeChanged)=\"onDateRangeChanged($event, 'ROYAL')\" [options]=\"myDateRangePickerOptions\"\r\n            [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n\r\n      </div>\r\n      <div class=\"card__button\">\r\n        <button (click)=\"onCheckAvailable(1)\" class=\"btn\" [hidden]=\"showDatePicker1\">Book Now</button>\r\n        <button (click)=\"findAvailableRooms(1)\" class=\"btn\" [hidden]=\"!showDatePicker1\" [disabled]=\"!f.valid\">Check Availability</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- ------------------------------------------------------------------------------------------------------------------------ -->\r\n\r\n    <div class=\"card col-lg-3\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/royal1.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker2\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Presidential</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>Queen size bed</li>\r\n            <hr>\r\n            <li>24 hour room service</li>\r\n            <hr>\r\n            <li>Presidential perks</li>\r\n            <hr>\r\n            <li>In-room jacuzzi</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker2\">\r\n        <form #f=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" (dateRangeChanged)=\"onDateRangeChanged($event, 'PRESIDENTIAL')\" [options]=\"myDateRangePickerOptions\"\r\n            [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n      \r\n      </div>\r\n      <div class=\"card__button\">\r\n        <button (click)=\"onCheckAvailable(2)\" class=\"btn\" [hidden]=\"showDatePicker2\">Book Now</button>\r\n        <button (click)=\"findAvailableRooms(2)\" class=\"btn\" [hidden]=\"!showDatePicker2\" [disabled]=\"!f.valid\">Check Availability</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- -------------------------------------------------------------------------------------------------------------------------- -->\r\n\r\n    <div class=\"card col-lg-3\" (click)=\"onCardClicked($event)\">\r\n      <div>\r\n        <img src=\"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/room-3.jpg\" alt=\"Room\" class=\"card__img\">\r\n      </div>\r\n      <div class=\"card__description\" [hidden]=\"showDatePicker3\">\r\n        <div class=\"card__description--title\">\r\n          <h1>Deluxe</h1>\r\n        </div>\r\n        <div class=\"card__description--content\">\r\n          <ul>\r\n            <hr>\r\n            <li>Twin size bed</li>\r\n            <hr>\r\n            <li>Complimentary breakfast</li>\r\n            <hr>\r\n            <li>Deluxe perks</li>\r\n            <hr>\r\n            <li>In-room bathtub</li>\r\n            <hr>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div class=\"card__date\" [hidden]=\"!showDatePicker3\">\r\n        <form #f=\"ngForm\" novalidate>\r\n          <my-date-range-picker name=\"mydaterange\" (dateRangeChanged)=\"onDateRangeChanged($event, 'DELUXE')\" [options]=\"myDateRangePickerOptions\"\r\n            [(ngModel)]=\"model\" required></my-date-range-picker>\r\n        </form>\r\n      \r\n      </div>\r\n      <div class=\"card__button\">\r\n        <button (click)=\"onCheckAvailable(3)\" class=\"btn\" [hidden]=\"showDatePicker3\">Book Now</button>\r\n        <button (click)=\"findAvailableRooms(3)\" class=\"btn\" [hidden]=\"!showDatePicker3\" [disabled]=\"!f.valid\">Check Availability</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -373,32 +374,47 @@ var HotelDetailsComponent = /** @class */ (function () {
             console.log(rooms);
         }, function (error) { return console.log(error); });
     };
-    HotelDetailsComponent.prototype.onDateRangeChanged = function (event) {
+    HotelDetailsComponent.prototype.onDateRangeChanged = function (event, roomType) {
         console.log('jsdate: ' + event.beginEpoc + " - " + event.endJsDate);
         this.hotelService.selectedCheckinDate = event.beginEpoc;
         this.hotelService.selectedCheckoutDate = event.endEpoc;
-        this.hotelService.filteredRooms = this.hotelService.rooms.filter(function (room) { return room.reservations.length === 0; }
-        //  || room.reservations.filter(reservation=>{
-        //     !(reservation.checkIn >= event.beginEpoc && reservation.checkIn <= event.endEpoc)
-        //       && !(reservation.checkIn >= event.beginEpoc && reservation.checkIn <= event.endEpoc)
-        // })
-        );
-        // this.hotelService.filteredRooms = this.hotelService.rooms.filter(room =>
-        //   room.reservation === null || !(event.beginEpoc >= room.reservation.checkIn && event.beginEpoc <= room.reservation.checkOut)
-        //    && !(room.reservation.checkIn >= event.beginEpoc && room.reservation.checkIn <= event.endEpoc)         
-        //  )
+        this.filterByDates(this.hotelService.rooms, event);
+        this.hotelService.filteredRooms = this.filteredRooms.filter(function (room) { return room.type === roomType; });
         console.log(this.hotelService.filteredRooms);
     };
-    HotelDetailsComponent.prototype.filter = function (room, event) {
-        var answer = room.reservations.map(function (reservation) {
-            if (!(event.beginEpoc >= reservation.checkIn && event.beginEpoc <= reservation.checkOut)
-                && !(reservation.checkIn >= event.beginEpoc && reservation.checkIn <= event.endEpoc)) {
-                return false;
+    HotelDetailsComponent.prototype.filterByDates = function (rooms, event) {
+        // this.filteredRooms=[];
+        var available = true;
+        //check all rooms
+        for (var i = 0; i < rooms.length; i++) {
+            //if room has no reservation add to available rooms(filteredRooms)
+            if (rooms[i].reservations.length === 0) {
+                this.filteredRooms.push(rooms[i]);
+                //if room has reservations check all reservations
             }
-            return true;
-        });
-        console.log(answer);
+            else {
+                for (var j = 0; j < rooms[i].reservations.length; j++) {
+                    var checkIn = rooms[i].reservations[j].checkIn;
+                    var checkOut = rooms[i].reservations[j].checkOut;
+                    //if selected range falls within any one of the reservations set available to false and stop checking the rest
+                    if ((event.beginEpoc >= checkIn && event.beginEpoc <= checkOut) ||
+                        (event.endEpoc >= checkIn && event.endEpoc <= checkOut) ||
+                        (checkIn >= event.beginEpoc && checkIn <= event.endEpoc)) {
+                        available = false;
+                        break;
+                    }
+                }
+                //if loop is done and room was available add room to available rooms
+                if (available) {
+                    this.filteredRooms.push(rooms[i]);
+                }
+            }
+        }
     };
+    /**
+     * navigates out of the child component that displays the room types
+     *
+     */
     HotelDetailsComponent.prototype.onCloseHandled = function () {
         this.router.navigate(['hotels']);
         this.showDatePicker1 = false;
@@ -614,14 +630,14 @@ var HotelService = /** @class */ (function () {
 /***/ "./src/app/hotel/room-list/room-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"popup\">\n  <div class=\"popup__content\">\n    <ul>\n      <div style=\"color: white;\" *ngFor=\"let room of rooms\">\n        <div>\n          Room Number: {{room.roomNumber}} Type: {{room.type}} Price: {{room.price}} Available: {{room.available}}\n          <input type=\"checkbox\" id=\"roomCheckbox\" (change)=\"addToCart($event, room)\">\n\n\n        </div>\n      </div>\n    </ul>\n    <div>\n      <button (click) = \"makeReservation(content)\">Reserve</button>\n    </div>\n  </div>\n</div>\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title\">Modal title</h4>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <p>One fine body&hellip;</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Confirm</button>\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"d()\">Cancel</button>\n  </div>\n</ng-template>\n<ng-template #confirmation let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title\">Confirmation</h4>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"c()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <p>Your Reservation has been confirmed</p>\n  </div>\n  <div class=\"modal-footer\">\n     <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Dismiss</button>\n  </div>\n</ng-template>"
+module.exports = "<div class=\"popup\">\n  <div class=\"popup__content col-sm-6\" >\n    <ul>\n      <div *ngFor=\"let room of rooms\">\n        <div>\n          Room Number: {{room.roomNumber}} Type: {{room.type}} Price: {{room.price}} Available: {{room.available}}\n          <input type=\"checkbox\" id=\"roomCheckbox\" (change)=\"addToCart($event, room)\">\n        </div>\n      </div>\n    </ul>\n    <div>\n      <button class=\"btn\" (click) = \"makeReservation(content)\">Reserve</button>\n    </div>\n  </div>\n</div>\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title\">Reservation Summary</h4>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <p>Room list and price summary goes here</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Confirm</button>\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"d()\">Cancel</button>\n  </div>\n</ng-template>\n<ng-template #confirmation let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title\">Confirmation</h4>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"c()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <p>Your Reservation has been confirmed</p>\n  </div>\n  <div class=\"modal-footer\">\n     <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"c()\">Dismiss</button>\n  </div>\n</ng-template>"
 
 /***/ }),
 
 /***/ "./src/app/hotel/room-list/room-list.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".popup__content {\n  background-color: white;\n  padding: 3rem 3rem;\n  font-size: 1.5rem; }\n"
 
 /***/ }),
 
@@ -704,7 +720,7 @@ var RoomListComponent = /** @class */ (function () {
             _this.http.post('/api/reservations', reservation).subscribe(function (response) {
                 console.log(response);
                 _this.modalService.open(_this.confirmation, { centered: true }).result.then(function () {
-                    _this.router.navigate(['hotels']);
+                    _this.router.navigate(['profile']);
                 }, function () { return console.log("ok"); });
             }, function (error) {
                 console.log(error);
@@ -712,6 +728,16 @@ var RoomListComponent = /** @class */ (function () {
         }, function () {
             console.log("Cancelled the reservation");
         });
+    };
+    RoomListComponent.prototype.onCloseHandled = function () {
+        this.router.navigate(['hotels']);
+    };
+    //cancel the click event from propagating to the parent div which triggers close event on the window
+    RoomListComponent.prototype.onCardClicked = function (e) {
+        if (e) {
+            e.stopPropagation();
+        }
+        return false;
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* ViewChild */])('confirmation'),
@@ -771,14 +797,14 @@ var XhrInterceptor = /** @class */ (function () {
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transparent col-lg-12\">\r\n  <nav class=\"col-lg-8 offset-lg-2\">\r\n\r\n    <ul>\r\n      \r\n      <li>\r\n        <a routerLink=\"/hotels\">Hotels</a>\r\n      </li>\r\n      <li>\r\n        <a routerLink=\"/profile\">Profile</a>\r\n      </li>\r\n      <li>\r\n        <img [src]=\"(userProfileImgUrl | async)\" class=\"img-thumbnail\" alt=\"profile picture\">\r\n\r\n      </li>\r\n      <li>\r\n        <a (click)=\"logout()\">Logout</a>\r\n      </li>      \r\n    </ul>\r\n  </nav>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<div class=\"transparent col-lg-12\">\r\n  <nav class=\"container\">\r\n\r\n    <ul>\r\n      \r\n      <li>\r\n        <a routerLink=\"/hotels\">Hotels</a>\r\n      </li>\r\n      <li>\r\n        <a routerLink=\"/profile\">Profile</a>\r\n      </li>\r\n      <a routerLink=\"/profile\">\r\n      <li>\r\n        \r\n        <img [src]=\"(userProfileImgUrl | async)\" class=\"img-thumbnail\" alt=\"profile picture\">\r\n\r\n      </li>\r\n      </a>\r\n\r\n      <li>\r\n        <a (click)=\"logout()\">Logout</a>\r\n      </li>      \r\n    </ul>\r\n  </nav>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/navbar/navbar.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".transparent {\n  position: fixed;\n  top: 0;\n  padding-top: .6rem;\n  z-index: 12;\n  height: 6rem;\n  background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 0)), to(rgba(0, 0, 0, 0.4)));\n  background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4)); }\n  .transparent li {\n    color: #fff;\n    font-size: 1.5rem;\n    list-style: none;\n    display: inline;\n    text-transform: uppercase;\n    font-weight: 600; }\n  .transparent li:not(:first-child) {\n      margin-left: 2rem; }\n  .transparent li a {\n      display: inline-block;\n      text-align: center;\n      text-decoration: none;\n      padding-top: .8rem;\n      color: white; }\n  .transparent li:last-child {\n      cursor: pointer;\n      float: right; }\n  .img-thumbnail {\n  margin-left: 2rem;\n  height: 4rem;\n  width: 4rem;\n  float: right;\n  border-radius: 20rem;\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  overflow: hidden; }\n"
+module.exports = ".transparent {\n  position: fixed;\n  top: 0;\n  left: 0;\n  padding-top: .6rem;\n  z-index: 12;\n  height: 6rem;\n  background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 0)), to(rgba(0, 0, 0, 0.4)));\n  background: linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4)); }\n  .transparent li {\n    color: #fff;\n    font-size: 1.5rem;\n    list-style: none;\n    display: inline;\n    text-transform: uppercase;\n    font-weight: 600; }\n  .transparent li:not(:first-child) {\n      margin-left: 2rem; }\n  .transparent li a {\n      display: inline-block;\n      text-align: center;\n      text-decoration: none;\n      padding-top: .8rem;\n      color: white; }\n  .transparent li:last-child {\n      cursor: pointer;\n      float: right; }\n  .img-thumbnail {\n  margin-left: 2rem;\n  height: 4rem;\n  width: 4rem;\n  float: right;\n  border-radius: 20rem;\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  overflow: hidden; }\n"
 
 /***/ }),
 
@@ -806,9 +832,9 @@ var NavbarComponent = /** @class */ (function () {
     function NavbarComponent(auth, userService) {
         this.auth = auth;
         this.userService = userService;
-        this.userProfileImgUrl = userService.getUserProfileImageUrlObservable();
     }
     NavbarComponent.prototype.ngOnInit = function () {
+        this.userProfileImgUrl = this.userService.getUserProfileImageUrlObservable();
     };
     NavbarComponent.prototype.logout = function () {
         this.auth.logout();
@@ -831,14 +857,14 @@ var NavbarComponent = /** @class */ (function () {
 /***/ "./src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"res col-lg-8 offset-lg-2\">\n  <ul>\n    <div *ngFor=\"let res of reservations\">{{res.id}} \n      Checkin: {{res.checkIn * 1000 | date:'shortDate'}} \n      Checkout: {{res.checkOut * 1000 | date:'shortDate'}}</div>\n\n  </ul>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row  profile\">\n    <div class=\"profile__about col-sm-5\">\n      <div class=\"profile__card\">\n        <div>\n          <img class=\"profile__card--image\" [src]=\"(user.profileImgUrl)\" alt=\"Profile Image\">\n        </div>\n        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia accusantium accusamus nulla, at numquam modi rerum!\n          Numquam rem modi provident inventore dolore, alias, eum et nihil corporis, eligendi molestiae vel?</p>\n      </div>\n    </div>\n    <div class=\"profile__reservation col\">\n      <div *ngIf=\"reservations.length > 0; else infoText\">\n        <ul>\n          <div class=\"profile__reservation--card\" *ngFor=\"let res of reservations\">\n            {{res.id}} Checkin: {{res.checkIn * 1000 | date:'shortDate'}} Checkout: {{res.checkOut * 1000 | date:'shortDate'}}\n          </div>\n        </ul>\n      </div>\n      <ng-template #infoText>\n        <p>Your Reservations Listed Here</p>\n      </ng-template>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/profile/profile.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".res {\n  margin-top: 5rem;\n  text-align: center; }\n"
+module.exports = ".profile {\n  margin-top: 6rem;\n  text-align: center;\n  overflow: hidden; }\n  .profile__card {\n    padding: 3rem 3rem;\n    -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);\n            box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2); }\n  .profile__card--image {\n      height: 20rem;\n      width: 20rem;\n      border-radius: 100rem;\n      margin-bottom: 3rem;\n      overflow: hidden; }\n  .profile__reservation {\n    overflow-y: auto;\n    height: 90vh; }\n  .profile__reservation--card {\n      height: 10rem;\n      padding: 3rem 3rem;\n      -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);\n              box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1); }\n"
 
 /***/ }),
 
@@ -1114,16 +1140,28 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getUserProfileImageUrlObservable = function () {
         return this.imgUrlSubject.asObservable();
     };
+    /**
+     * fetches user by its username
+     * updates the variable loggedInUser with the fetched user
+     * updates the image url for navigation bar profile picture
+     * @param username username
+     *
+     */
     UserService.prototype.getUserByUsername = function (username) {
         var _this = this;
         return this.http.get('/api/users/user/' + username).subscribe(function (result) {
-            _this.imgUrlSubject.next(result.user.profileImgUrl);
-            console.log(result.user.profileImgUrl);
+            _this.updateProfileImageUrl(result.user.profileImgUrl);
             _this.loggedInUser = result.user;
             return result.user;
         }, function (error) {
             console.log(error);
         });
+    };
+    UserService.prototype.updateProfileImageUrl = function (profileImageUrl) {
+        this.imgUrlSubject.next(profileImageUrl);
+    };
+    UserService.prototype.getLoggedInUser = function () {
+        return this.loggedInUser;
     };
     UserService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),

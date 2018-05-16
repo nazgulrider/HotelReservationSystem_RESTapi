@@ -41,13 +41,15 @@ public class HotelReservationApplication {
 						"Tomato"+userCount,
 						"user"+userCount+"@gmail.com",
 						4692765544L,
-						"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/profile1.jpg"));
+						"https://s3.us-east-2.amazonaws.com/hotel-reservation-system/batman.jpg"));
 				userCount++;
 			}
 
 			int count = 1;
 			int count1 =1;
-			int roomNumber = 100;
+            int count2 =1;
+            int count3 =1;
+			int roomNumber = 101;
 
 			while(count<11){
 				Hotel hotel = new Hotel("Hotel"+count,
@@ -55,11 +57,24 @@ public class HotelReservationApplication {
 				hotels.add(hotel);
 
 				while (count1<11){
-					rooms.add(new Room(roomNumber,RoomType.ROYAL,49.99f, hotel));
+					rooms.add(new Room(roomNumber,RoomType.ROYAL,299.99f, hotel));
 					roomNumber++;
 					count1++;
 				}
+				while (count2<11){
+					rooms.add(new Room(roomNumber,RoomType.PRESIDENTIAL,199.99f, hotel));
+					roomNumber++;
+					count2++;
+				}
+				while (count3<11){
+					rooms.add(new Room(roomNumber,RoomType.DELUXE,99.99f, hotel));
+					roomNumber++;
+					count3++;
+				}
 				count1=1;
+                count2=1;
+                count3=1;
+                roomNumber=101;
 				count++;
 			}
 
